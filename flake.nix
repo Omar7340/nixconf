@@ -6,15 +6,12 @@
     
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
     };
-
-    nvf.url = "github:notashelf/nvf";
   };
 
-  outputs = { self, nixpkgs, nixos-wsl, nvf, ... }@inputs:
+  outputs = { self, nixpkgs, nixos-wsl, nixos-hardware, ... }@inputs:
     let 
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
@@ -36,8 +33,16 @@
           modules = [
             nixos-wsl.nixosModules.default
             ./hosts/wsl/configuration.nix
-            inputs.home-manager.nixosModules.default
-            nvf.nixosModules.default
+          ];
+        };
+        surface5 = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {inherit inputs;};
+          modules = [
+            nixos-hardware.nixosModules.microsoft-surface-pro-intel
+            ./hosts/surface5/configuration.nix
+            ./nixosModules/terminal.nix
+            ./nixosModules/desktopApps.nix
           ];
         };
       };
