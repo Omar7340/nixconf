@@ -7,6 +7,11 @@
     # most settings are documented in the appendix
     settings = {
       vim = {
+        theme = {
+            enable = true;
+            name = "tokyonight";
+            style = "storm";
+        };
         viAlias = true;
         vimAlias = true;
 
