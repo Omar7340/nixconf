@@ -9,14 +9,54 @@
       vim = {
         theme = {
             enable = true;
-            name = "tokyonight";
-            style = "storm";
+#            name = "tokyonight";
+#            style = "storm";
+            name = "oxocarbon";
+            style = "dark";
         };
+
+        visuals = {
+            nvim-web-devicons.enable = true;
+            nvim-cursorline.enable = true;
+        };
+
+        statusline.lualine.enable = true;
+
+        filetree.nvimTree.enable = false;
+        telescope.enable = true;
+
         viAlias = true;
         vimAlias = true;
 
         lsp.enable = true;
-        telescope.enable = true;
+        lsp.formatOnSave = true;
+
+        treesitter.enable = true;
+        treesitter.context.enable = true;
+        languages = {
+            enableTreesitter = true;
+
+            nix.enable = true;
+        };
+
+        autocomplete.nvim-cmp.enable = true;
+
+        utility.oil-nvim.enable = true;
+        utility.oil-nvim.gitStatus.enable = true;
+        utility.motion.hop.enable = true;
+#        utility.motion.hop.mappings.hop = "";
+
+        git = {
+            enable = true;
+            gitsigns.enable = true;
+        };
+
+        terminal = {
+            toggleterm = {
+                enable = true;
+                lazygit.enable = true;
+            };
+        };
 
         binds = {
           whichKey.enable = true;
@@ -25,6 +65,7 @@
         options = {
           shiftwidth = 4;
         };
+
       };
     };
   };

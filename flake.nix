@@ -2,8 +2,12 @@
   description = "Configuration NixOS multi-systèmes";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    
+
+    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # pinned on this nixpkgs until this is resolved
+    # issue https://github.com/NotAShelf/nvf/issues/1312
+    nixpkgs.url = "github:nixos/nixpkgs/cad22e7d996aea55ecab064e84834289143e44a0";
+
     # Gestionnaire WSL
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
@@ -19,9 +23,18 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
-  outputs = inputs@{ self, nixpkgs, flake-parts, ... }:
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      flake-parts,
+      ...
+    }:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" "aarch64-linux" ];
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
 
       flake = {
         # On définit ici nos modules réutilisables (exportés par le flake)
@@ -55,10 +68,15 @@
         };
       };
 
-      perSystem = { pkgs, ... }: {
-        devShells.default = pkgs.mkShell {
-          buildInputs = [ pkgs.nil pkgs.git ];
+      perSystem =
+        { pkgs, ... }:
+        {
+          devShells.default = pkgs.mkShell {
+            buildInputs = [
+              pkgs.nil
+              pkgs.git
+            ];
+          };
         };
-      };
     };
 }
