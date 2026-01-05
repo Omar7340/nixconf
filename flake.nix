@@ -3,10 +3,7 @@
 
   inputs = {
 
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # pinned on this nixpkgs until this is resolved
-    # issue https://github.com/NotAShelf/nvf/issues/1312
-    nixpkgs.url = "github:nixos/nixpkgs/cad22e7d996aea55ecab064e84834289143e44a0";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     # Gestionnaire WSL
     nixos-wsl = {
