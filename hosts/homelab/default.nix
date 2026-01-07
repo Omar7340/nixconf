@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   imports = [
     ./hardware-configuration.nix
   ];
@@ -7,13 +8,13 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "BabelNix";
+  networking.hostName = "babel";
   networking.networkmanager.enable = true;
 
   # Services spécifiques
   services.tailscale.enable = true;
   services.openssh.enable = true;
-  
+
   services.xserver.xkb = {
     layout = "fr";
     variant = "";
@@ -23,8 +24,15 @@
   users.users.babel = {
     isNormalUser = true;
     description = "babel";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
+
+  users.users.root.openssh.authorizedKeys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICJqgDOdY6OLzXCTHRuWAVHP8zEJ8PYtqJUfrLeTJKSA nixos@nixos"
+  ];
 
   system.stateVersion = "25.05";
 }

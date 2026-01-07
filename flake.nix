@@ -11,6 +11,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Neovim Framework
     nvf = {
       url = "github:NotAShelf/nvf";
@@ -53,10 +57,12 @@
           };
 
           # --- Machine 2 : Homelab ---
-          BabelNix = nixpkgs.lib.nixosSystem {
+          babel = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = { inherit inputs self; };
             modules = [
+              inputs.disko.nixosModules.disko
+              ./hosts/homelab/disk-config.nix
               ./hosts/homelab
               self.nixosModules.core
               inputs.nvf.nixosModules.default
