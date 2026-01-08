@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  services.glances.enable = true;
+  services.glances.openFirewall = true;
+
   services.homepage-dashboard = {
     enable = true;
     openFirewall = true;
@@ -9,9 +12,14 @@
 
     widgets = [
       {
-        resources = {
+        glances = {
+          url = "http://localhost:61208";
+          metric = "info";
+          version = 4;
           cpu = true;
-          memory = true;
+          cputemp = true;
+          uptime = true;
+          mem = true;
           disk = [
             "/"
             "/mnt/media"
@@ -22,7 +30,11 @@
       }
       {
         datetime = {
-          format = "LLLL";
+          locale = "fr";
+          format = {
+            dateStyle = "long";
+            timeStyle = "short";
+          };
         };
       }
     ];
