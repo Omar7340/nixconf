@@ -21,6 +21,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixarr = {
+      url = "github:rasmus-kirk/nixarr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
@@ -66,6 +71,8 @@
               ./hosts/homelab
               self.nixosModules.core
               inputs.nvf.nixosModules.default
+              inputs.nixarr.nixosModules.default
+              ./modules/services/arr
             ];
           };
         };

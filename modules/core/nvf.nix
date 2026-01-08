@@ -65,7 +65,7 @@
         };
 
         options = {
-          shiftwidth = 4;
+          shiftwidth = 2;
         };
 
       };
