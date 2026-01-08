@@ -1,28 +1,23 @@
 { config, pkgs, ... }:
 
 {
-  services.glances.enable = true;
-
   services.homepage-dashboard = {
     enable = true;
+    openFirewall = true;
 
-    # --- WIDGETS (En-tête) ---
+    allowedHosts = "192.168.1.174:8082";
+
     widgets = [
       {
         resources = {
           cpu = true;
           memory = true;
-          disk = "/";
+          disk = [
+            "/"
+            "/mnt/media"
+          ];
+          expanded = true;
           label = "Système";
-        };
-      }
-      {
-        weather = {
-          label = "Météo";
-          latitude = "48.8566";
-          longitude = "2.3522";
-          units = "metric";
-          cache = 30;
         };
       }
       {
@@ -34,88 +29,64 @@
 
     services = [
       {
-        "Monitoring & Santé" = [
+        "Gestion des Médias" = [
           {
-            "Uptime Kuma" = {
-              icon = "uptime-kuma.svg";
-              href = "http://192.167.1.174:3001";
+            "Prowlarr" = {
+              icon = "prowlarr.png";
+              href = "http://192.168.1.174:9696";
               widget = {
-                type = "uptimekuma";
-                url = "http://192.167.1.174:3001";
-                slug = "default";
+                type = "prowlarr";
+                url = "http://localhost:9696";
+                key = "6acd92d68d5a4fb284387864813ceb15";
               };
             };
           }
-          {
-            "Glances" = {
-              icon = "glances.svg";
-              href = "http://192.167.1.174:61208";
-              widget = {
-                type = "glances";
-                url = "http://192.167.1.174:61208";
-              };
-            };
-          }
-        ];
-      }
-      {
-        "Media Server" = [
-          {
-            "Jellyfin" = {
-              icon = "jellyfin.svg";
-              href = "http://192.167.1.174:8096";
-              widget = {
-                type = "jellyfin";
-                url = "http://192.167.1.174:8096";
-                key = "";
-              };
-            };
-          }
-          {
-            "Jellyseerr" = {
-              icon = "jellyseerr.svg";
-              href = "http://192.167.1.174:5055";
-              widget = {
-                type = "jellyseerr";
-                url = "http://192.167.1.174:5055";
-                key = "MTc2NzgzMjg5MDM3MDQ5N2U3ZWIwLWIzNTctNDg1Yy04YjVjLTBiZWMwN2I0NzY5Ng";
-              };
-            };
-          }
-        ];
-      }
-      {
-        "Gestionnaires (Arrs)" = [
           {
             "Radarr" = {
-              icon = "radarr.svg";
-              href = "http://192.167.1.174:7878";
+              icon = "radarr.png";
+              href = "http://192.168.1.174:7878";
               widget = {
                 type = "radarr";
-                url = "http://192.167.1.174:7878";
+                url = "http://localhost:7878";
                 key = "72d00c6b890349a78168d0c3244e8159";
               };
             };
           }
           {
             "Sonarr" = {
-              icon = "sonarr.svg";
-              href = "http://192.167.1.174:8989";
+              icon = "sonarr.png";
+              href = "http://192.168.1.174:8989";
               widget = {
                 type = "sonarr";
-                url = "http://192.167.1.174:8989";
+                url = "http://localhost:8989";
                 key = "b98620222f7f4504af4591a8aa55c6af";
               };
             };
           }
+        ];
+      }
+      {
+        "Streaming & Requêtes" = [
           {
-            "Prowlarr" = {
-              icon = "prowlarr.svg";
-              href = "http://192.167.1.174:9696";
+            "Jellyfin" = {
+              icon = "jellyfin.png";
+              href = "http://192.168.1.174:8096";
               widget = {
-                type = "prowlarr";
-                url = "http://192.167.1.174:9696";
-                key = "6acd92d68d5a4fb284387864813ceb15";
+                type = "jellyfin";
+                url = "http://localhost:8096";
+                key = "e71e68a019bc4a258016cad6d01c3adc";
+                enableNowPlaying = true;
+              };
+            };
+          }
+          {
+            "Jellyseerr" = {
+              icon = "jellyseerr.png";
+              href = "http://192.168.1.174:5055";
+              widget = {
+                type = "jellyseerr";
+                url = "http://localhost:5055";
+                key = "MTc2NzgzMjg5MDM3MDQ5N2U3ZWIwLWIzNTctNDg1Yy04YjVjLTBiZWMwN2I0NzY5Ng==";
               };
             };
           }
@@ -125,11 +96,11 @@
         "Téléchargement" = [
           {
             "Transmission" = {
-              icon = "transmission.svg";
-              href = "http://192.167.1.174:9091";
+              icon = "transmission.png";
+              href = "http://192.168.1.174:9091";
               widget = {
                 type = "transmission";
-                url = "http://192.167.1.174:9091";
+                url = "http://localhost:9091";
               };
             };
           }
