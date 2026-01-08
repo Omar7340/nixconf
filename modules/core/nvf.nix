@@ -39,6 +39,10 @@
           nix.enable = true;
           yaml.enable = true;
           typst.enable = true;
+          html.enable = true;
+          json.enable = true;
+          python.enable = true;
+          ts.enable = true;
         };
 
         autocomplete.nvim-cmp.enable = true;
