@@ -42,6 +42,7 @@
         };
 
         autocomplete.nvim-cmp.enable = true;
+        autopairs.nvim-autopairs.enable = true;
 
         utility.oil-nvim.enable = true;
         utility.oil-nvim.gitStatus.enable = true;
@@ -65,7 +66,9 @@
         };
 
         options = {
+          tabstop = 2;
           shiftwidth = 2;
+          autoindent = true;
         };
 
       };
