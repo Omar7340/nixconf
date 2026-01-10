@@ -1,4 +1,9 @@
 {
+  services.flaresolverr.enable = true;
+  services.flaresolverr.openFirewall = true;
+
+  networking.nameservers = [ "1.1.1.1" ]; # cloudflare dns TODO : Add adguard service
+
   nixarr = {
     enable = true;
     # These two values are also the default, but you can set them to whatever
