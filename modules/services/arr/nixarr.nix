@@ -6,23 +6,16 @@
 
   nixarr = {
     enable = true;
-    # These two values are also the default, but you can set them to whatever
-    # else you want
-    # WARNING: Do _not_ set them to `/home/user/whatever`, it will not work!
     mediaDir = "/mnt/media/nixarr";
     stateDir = "/mnt/media/nixarr/.state/nixarr";
 
     vpn = {
       enable = true;
-      # WARNING: This file must _not_ be in the config git directory
-      # You can usually get this wireguard file from your VPN provider
       wgConf = "/data/.secret/vpn/wg.conf";
     };
 
     jellyfin = {
       enable = true;
-      # These options set up a nginx HTTPS reverse proxy, so you can access
-      # Jellyfin on your domain with HTTPS
     };
 
     transmission = {
@@ -31,8 +24,51 @@
       peerPort = 54734; # Set this to the port forwarded by your VPN
     };
 
-    # It is possible for this module to run the *Arrs through a VPN, but it
-    # is generally not recommended, as it can cause rate-limiting issues.
+    recyclarr = {
+      enable = true;
+      configuration = {
+        sonarr = {
+          series = {
+            base_url = "http://localhost:8989";
+            api_key = "!env_var SONARR_API_KEY";
+            delete_old_custom_formats = true;
+
+            quality_definition = {
+              type = "series";
+            };
+
+            custom_formats = [
+              {
+                trash_ids = [
+                  "07a32f77690263bb9fda1842db7e273f" # VOSTFR
+                ];
+              }
+            ];
+          };
+        };
+
+        radarr = {
+          movies = {
+            base_url = "http://localhost:7878";
+            api_key = "!env_var RADARR_API_KEY";
+            delete_old_custom_formats = true;
+
+            quality_definition = {
+              type = "movie";
+            };
+
+            custom_formats = [
+              {
+                trash_ids = [
+                  "9172b2f683f6223e3a1846427b417a3d" # VOSTFR
+                ];
+              }
+            ];
+          };
+        };
+      };
+    };
+
     prowlarr.enable = true;
     radarr.enable = true;
     readarr.enable = true;
