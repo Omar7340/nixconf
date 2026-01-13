@@ -75,6 +75,17 @@
               };
             };
           }
+          {
+            "Bazarr" = {
+              icon = "bazarr.png";
+              href = "http://192.168.1.174:6767";
+              widget = {
+                type = "bazarr";
+                url = "http://localhost:6767";
+                key = "fba75d15dd8f0570cb6c35fc64413417";
+              };
+            };
+          }
         ];
       }
       {
