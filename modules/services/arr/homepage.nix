@@ -8,7 +8,7 @@
     enable = true;
     openFirewall = true;
 
-    allowedHosts = "192.168.1.174:8082,100.123.123.28:8082";
+    allowedHosts = "192.168.1.174:8082,100.123.123.28:8082,hp.babel.local";
 
     widgets = [
       {

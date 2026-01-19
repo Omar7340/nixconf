@@ -2,8 +2,6 @@
   services.flaresolverr.enable = true;
   services.flaresolverr.openFirewall = true;
 
-  networking.nameservers = [ "1.1.1.1" ]; # cloudflare dns TODO : Add adguard service
-
   nixarr = {
     enable = true;
     mediaDir = "/mnt/media/nixarr";
