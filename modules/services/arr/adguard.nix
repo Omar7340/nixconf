@@ -1,6 +1,7 @@
 { config, ... }:
 {
   networking.firewall.allowedUDPPorts = [ 53 ]; # for DNS resolving
+  networking.nameservers = [ "127.0.0.1" ];
 
   services.adguardhome = {
     enable = true;

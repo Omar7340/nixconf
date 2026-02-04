@@ -73,6 +73,7 @@
               inputs.nvf.nixosModules.default
               inputs.nixarr.nixosModules.default
               ./modules/services/arr
+              ./modules/services/utils
             ];
           };
         };
