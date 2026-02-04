@@ -1,0 +1,137 @@
+{
+  flake.nixosModules.homepage =
+    { config, pkgs, ... }:
+
+    {
+      services.glances.enable = true;
+      services.glances.openFirewall = true;
+
+      services.homepage-dashboard = {
+        enable = true;
+        openFirewall = true;
+
+        allowedHosts = "192.168.1.174:8082,100.123.123.28:8082,hp.babel.local";
+
+        widgets = [
+          {
+            glances = {
+              url = "http://localhost:61208";
+              metric = "info";
+              version = 4;
+              cpu = true;
+              cputemp = true;
+              uptime = true;
+              mem = true;
+              disk = [
+                "/"
+                "/mnt/media"
+              ];
+              expanded = true;
+              label = "Système";
+            };
+          }
+          {
+            datetime = {
+              locale = "fr";
+              format = {
+                dateStyle = "long";
+                timeStyle = "short";
+              };
+            };
+          }
+        ];
+
+        services = [
+          {
+            "Gestion des Médias" = [
+              {
+                "Prowlarr" = {
+                  icon = "prowlarr.png";
+                  href = "http://192.168.1.174:9696";
+                  widget = {
+                    type = "prowlarr";
+                    url = "http://localhost:9696";
+                    key = "6acd92d68d5a4fb284387864813ceb15";
+                  };
+                };
+              }
+              {
+                "Radarr" = {
+                  icon = "radarr.png";
+                  href = "http://192.168.1.174:7878";
+                  widget = {
+                    type = "radarr";
+                    url = "http://localhost:7878";
+                    key = "72d00c6b890349a78168d0c3244e8159";
+                  };
+                };
+              }
+              {
+                "Sonarr" = {
+                  icon = "sonarr.png";
+                  href = "http://192.168.1.174:8989";
+                  widget = {
+                    type = "sonarr";
+                    url = "http://localhost:8989";
+                    key = "b98620222f7f4504af4591a8aa55c6af";
+                  };
+                };
+              }
+              {
+                "Bazarr" = {
+                  icon = "bazarr.png";
+                  href = "http://192.168.1.174:6767";
+                  widget = {
+                    type = "bazarr";
+                    url = "http://localhost:6767";
+                    key = "fba75d15dd8f0570cb6c35fc64413417";
+                  };
+                };
+              }
+            ];
+          }
+          {
+            "Streaming & Requêtes" = [
+              {
+                "Jellyfin" = {
+                  icon = "jellyfin.png";
+                  href = "http://192.168.1.174:8096";
+                  widget = {
+                    type = "jellyfin";
+                    url = "http://localhost:8096";
+                    key = "e71e68a019bc4a258016cad6d01c3adc";
+                    enableNowPlaying = true;
+                  };
+                };
+              }
+              {
+                "Jellyseerr" = {
+                  icon = "jellyseerr.png";
+                  href = "http://192.168.1.174:5055";
+                  widget = {
+                    type = "jellyseerr";
+                    url = "http://localhost:5055";
+                    key = "MTc2NzgzMjg5MDM3MDQ5N2U3ZWIwLWIzNTctNDg1Yy04YjVjLTBiZWMwN2I0NzY5Ng==";
+                  };
+                };
+              }
+            ];
+          }
+          {
+            "Téléchargement" = [
+              {
+                "Transmission" = {
+                  icon = "transmission.png";
+                  href = "http://192.168.1.174:9091";
+                  widget = {
+                    type = "transmission";
+                    url = "http://localhost:9091";
+                  };
+                };
+              }
+            ];
+          }
+        ];
+      };
+    };
+}
