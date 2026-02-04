@@ -1,6 +1,11 @@
-{ inputs, ...} : {
-  flake.nixosModules.nix = {...}: {
-    nix.settings.experimental-features = ["nix-command", "flakes"];
-    nixpkgs.config.allowUnfree = true;
-  };
+{
+  flake.nixosModules.nix =
+    { ... }:
+    {
+      nix.settings.experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      nixpkgs.config.allowUnfree = true;
+    };
 }

@@ -2,11 +2,11 @@
 {
   flake.nixosConfigurations.babel = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      self.nixosModules.hostMain
+      self.nixosModules.hostBabel
     ];
   };
 
-  flake.nixosModules.hostMain =
+  flake.nixosModules.hostBabel =
     { pkgs, ... }:
     {
       imports = [
