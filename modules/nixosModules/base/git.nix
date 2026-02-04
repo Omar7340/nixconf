@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.nixosModules.git =
+  flake.nixosModules.base =
     { config, ... }:
     let
       user = config.preferences.user;

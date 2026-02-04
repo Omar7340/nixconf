@@ -1,8 +1,11 @@
 { inputs, self, ... }:
 {
-  flake.nixosConfiguration.wsl = inputs.nixpkgs.lib.nixosSystem {
+  flake.nixosConfigurations.wsl = inputs.nixpkgs.lib.nixosSystem {
     modules = [
       self.nixosModules.hostWsl
+      self.nixosModules.git
+      self.nixosModules.nix
+      self.nixosModules.shortcuts
     ];
   };
 

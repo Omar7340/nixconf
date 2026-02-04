@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.nixosModules.locals =
+  flake.nixosModules.base =
     { ... }:
     {
       time.timeZone = "Europe/Paris";

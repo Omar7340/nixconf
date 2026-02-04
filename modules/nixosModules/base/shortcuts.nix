@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.shortcuts =
+  flake.nixosModules.base =
     { ... }:
     {
       environment.shellAliases = {

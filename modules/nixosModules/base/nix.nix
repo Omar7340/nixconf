@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.nix =
+  flake.nixosModules.base =
     { ... }:
     {
       nix.settings.experimental-features = [
