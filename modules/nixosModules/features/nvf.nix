@@ -1,7 +1,9 @@
+{ inputs, ... }:
 {
   flake.nixosModules.nvf =
     { ... }:
     {
+      imports = [ inputs.nvf.nixosModules.default ];
       programs.nvf = {
         enable = true;
 
