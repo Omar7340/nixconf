@@ -1,6 +1,7 @@
 { lib, ... }:
 {
   flake.nixosModules.homelab =
+    { ... }:
     let
 
       inherit (lib) mkOption types;

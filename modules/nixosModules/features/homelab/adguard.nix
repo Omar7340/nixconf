@@ -1,6 +1,7 @@
+{ config, lib, ... }:
 {
   flake.nixosModules.homelab =
-    { config, lib, ... }:
+    { ... }:
     {
 
       networking.firewall.allowedUDPPorts = [ 53 ]; # for DNS resolving

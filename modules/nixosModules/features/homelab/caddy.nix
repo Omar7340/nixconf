@@ -1,6 +1,7 @@
+{ config, ... }:
 {
   flake.nixosModules.homelab =
-    { config, lib, ... }:
+    { ... }:
 
     let
       cfg = config.homelab;
