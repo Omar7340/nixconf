@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.homepage =
+  flake.nixosModules.homelab =
     { config, pkgs, ... }:
 
     {
@@ -41,38 +41,13 @@
           }
         ];
 
-        services = [
-          {
-            "Streaming & Requêtes" = [
-              {
-                "Jellyfin" = {
-                  icon = "jellyfin.png";
-                  href = "http://192.168.1.174:8096";
-                  widget = {
-                    type = "jellyfin";
-                    url = "http://localhost:8096";
-                    key = "e71e68a019bc4a258016cad6d01c3adc";
-                    enableNowPlaying = true;
-                  };
-                };
-              }
-            ];
-          }
-          {
-            "Téléchargement" = [
-              {
-                "Transmission" = {
-                  icon = "transmission.png";
-                  href = "http://192.168.1.174:9091";
-                  widget = {
-                    type = "transmission";
-                    url = "http://localhost:9091";
-                  };
-                };
-              }
-            ];
-          }
-        ];
+        services = map (
+          item:
+          builtins.removeAttrs item [
+            "sub"
+            "port"
+          ]
+        ) config.homelab.catalog;
       };
     };
 }

@@ -2,14 +2,10 @@
 {
   flake.nixosConfigurations.babel = inputs.nixpkgs.lib.nixosSystem {
     modules = [
-      # TODO refactor to just import homelab modules
       self.nixosModules.hostBabel
       self.nixosModules.base
-      self.nixosModules.caddy
       self.nixosModules.nvf
-      self.nixosModules.nixarr
-      self.nixosModules.adguardhome
-      self.nixosModules.homepage
+      self.nixosModules.homelab
     ];
   };
 

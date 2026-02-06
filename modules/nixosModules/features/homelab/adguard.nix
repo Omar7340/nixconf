@@ -1,9 +1,32 @@
 {
-  flake.nixosModules.adguardhome =
-    { config, ... }:
+  flake.nixosModules.homelab =
+    { config, lib, ... }:
     {
+
       networking.firewall.allowedUDPPorts = [ 53 ]; # for DNS resolving
       networking.nameservers = [ "127.0.0.1" ];
+
+      config.homelab.catalog =
+        let
+          domain = config.homelab.domain;
+          inherit (lib.strings) toLower;
+        in
+        [
+          rec {
+            icon = "adguard.png";
+            name = "AdGuard";
+            href = "https://${sub}.${domain}";
+            sub = "ad";
+            port = config.services.adguardhome.port;
+            widget = {
+              type = toLower name;
+              url = "http://localhost:${port}";
+              # use sops-nix
+              user = "";
+              password = "";
+            };
+          }
+        ];
 
       services.adguardhome = {
         enable = true;

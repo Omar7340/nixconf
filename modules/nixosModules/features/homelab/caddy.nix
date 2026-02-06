@@ -1,9 +1,10 @@
 {
-  flake.nixosModules.caddy =
+  flake.nixosModules.homelab =
     { config, lib, ... }:
 
     let
-      baseDomain = "babel.local";
+      cfg = config.homelab;
+      baseDomain = cfg.domain;
 
       servicesList = [
         {
