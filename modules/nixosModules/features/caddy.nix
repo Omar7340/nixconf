@@ -15,32 +15,8 @@
           port = 8082;
         }
         {
-          sub = "sonarr";
-          port = 8989;
-        }
-        {
-          sub = "bazarr";
-          port = 6767;
-        }
-        {
-          sub = "radarr";
-          port = 7878;
-        }
-        {
-          sub = "prowlarr";
-          port = 9696;
-        }
-        {
-          sub = "bazarr";
-          port = 6767;
-        }
-        {
           sub = "jellyfin";
           port = 8096;
-        }
-        {
-          sub = "jellyseer";
-          port = 5055;
         }
         {
           sub = "transmission";
