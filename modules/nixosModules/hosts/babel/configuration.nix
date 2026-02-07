@@ -10,7 +10,7 @@
   };
 
   flake.nixosModules.hostBabel =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       imports = [
         inputs.disko.nixosModules.disko
@@ -37,6 +37,8 @@
         layout = "fr";
         variant = "";
       };
+
+      preferences.user.name = "babel";
 
       # Utilisateur spécifique
       users.users.babel = {

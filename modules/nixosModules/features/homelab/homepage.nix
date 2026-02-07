@@ -4,13 +4,11 @@
 
     {
       services.glances.enable = true;
-      services.glances.openFirewall = true;
 
       services.homepage-dashboard = {
         enable = true;
-        openFirewall = true;
 
-        allowedHosts = "192.168.1.174:8082,100.123.123.28:8082,hp.babel.local";
+        allowedHosts = "hp.babel.local";
 
         widgets = [
           {
@@ -43,6 +41,7 @@
 
         services =
           let
+            catalog = builtins.filter (item: item.name != "Homepage") config.homelab.catalog;
             mkServices =
               services:
               map (item: {
@@ -57,7 +56,7 @@
           in
           [
             {
-              "Homelab" = mkServices config.homelab.catalog;
+              "Homelab" = mkServices catalog;
             }
           ];
       };
