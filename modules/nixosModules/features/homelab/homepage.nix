@@ -41,13 +41,25 @@
           }
         ];
 
-        services = map (
-          item:
-          builtins.removeAttrs item [
-            "sub"
-            "port"
-          ]
-        ) config.homelab.catalog;
+        services =
+          let
+            mkServices =
+              services:
+              map (item: {
+                "${item.name}" = (
+                  builtins.removeAttrs item [
+                    "sub"
+                    "port"
+                    "name"
+                  ]
+                );
+              }) services;
+          in
+          [
+            {
+              "Homelab" = mkServices config.homelab.catalog;
+            }
+          ];
       };
     };
 }

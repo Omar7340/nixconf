@@ -32,36 +32,5 @@
         };
       };
 
-      config.homelab.catalog =
-        let
-          domain = config.homelab.domain;
-          inherit (lib.strings) toLower;
-        in
-        [
-          rec {
-            icon = "${toLower name}.png";
-            name = "Transmission";
-            href = "https://${sub}.${domain}";
-            sub = "dl";
-            port = config.nixarr.transmission.uiPort;
-            widget = {
-              type = toLower name;
-              url = "http://localhost:${port}";
-            };
-          }
-          rec {
-            icon = "jellyfin.png";
-            name = "Jellyfin";
-            href = "https://${sub}.${domain}";
-            sub = "jf";
-            port = 8096;
-            widget = {
-              type = toLower name;
-              url = "http://localhost:${port}";
-              enableNowPlaying = true;
-              key = "e71e68a019bc4a258016cad6d01c3adc";
-            };
-          }
-        ];
     };
 }

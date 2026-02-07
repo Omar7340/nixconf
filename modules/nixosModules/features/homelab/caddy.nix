@@ -1,30 +1,10 @@
-{ config, ... }:
 {
   flake.nixosModules.homelab =
-    { ... }:
+    { config, ... }:
 
     let
       cfg = config.homelab;
       baseDomain = cfg.domain;
-
-      servicesList = [
-        {
-          sub = "adguard";
-          port = 3000;
-        }
-        {
-          sub = "hp";
-          port = 8082;
-        }
-        {
-          sub = "jellyfin";
-          port = 8096;
-        }
-        {
-          sub = "transmission";
-          port = 9091;
-        }
-      ];
 
       mkVHost =
         { sub, port }:
@@ -47,7 +27,14 @@
       services.caddy = {
         enable = true;
 
-        virtualHosts = builtins.listToAttrs (map mkVHost servicesList);
+        virtualHosts = builtins.listToAttrs (
+          map mkVHost (
+            map (builtins.intersectAttrs {
+              sub = null;
+              port = null;
+            }) cfg.catalog
+          )
+        );
       };
     };
 }
