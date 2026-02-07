@@ -16,7 +16,7 @@
       wsl.enable = true;
       wsl.defaultUser = "nixos";
 
-      networking.hostName = "nixos-wsl";
+      networking.hostName = "wsl";
       nixpkgs.hostPlatform = "x86_64-linux";
 
       system.stateVersion = "25.05";
