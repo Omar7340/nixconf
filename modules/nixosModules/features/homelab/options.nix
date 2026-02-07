@@ -31,6 +31,7 @@
             icon = "${toLower name}.png";
             name = "Transmission";
             href = "https://${sub}.${domain}";
+            ping = href;
             sub = "dl";
             port = toString config.nixarr.transmission.uiPort;
             widget = {
@@ -42,6 +43,7 @@
             icon = "jellyfin.png";
             name = "Jellyfin";
             href = "https://${sub}.${domain}";
+            ping = href;
             sub = "jf";
             port = "8096";
             widget = {
@@ -52,9 +54,10 @@
             };
           }
           rec {
-            icon = "adguard.png";
+            icon = "adguard-home.png";
             name = "AdGuard";
             href = "https://${sub}.${domain}";
+            ping = href;
             sub = "ad";
             port = toString config.services.adguardhome.port;
             widget = {
