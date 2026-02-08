@@ -163,28 +163,6 @@
         "type": "github"
       }
     },
-    "nixarr": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "vpnconfinement": "vpnconfinement",
-        "website-builder": "website-builder"
-      },
-      "locked": {
-        "lastModified": 1770042103,
-        "narHash": "sha256-6qbWViUU0kQfC5JGCEHAy7UhaVIo+ni5fB7rmtcbxAI=",
-        "owner": "rasmus-kirk",
-        "repo": "nixarr",
-        "rev": "96973b6a8c99a31a9cfe6f8affa4da446a0022bc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rasmus-kirk",
-        "repo": "nixarr",
-        "type": "github"
-      }
-    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -250,11 +228,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1770213521,
-        "narHash": "sha256-ZUGJ3xZQfDcKCSBi0Qw7pSXWc2zkU8SxDJfsA7Uv8JI=",
+        "lastModified": 1770471765,
+        "narHash": "sha256-xyvGUrVfRORXnOseZ75H+F4zjQXGU/muvBYQgtNEnNU=",
         "owner": "NotAShelf",
         "repo": "nvf",
-        "rev": "9da5d517406c35b5bf738f446e5e51237f27b655",
+        "rev": "d5824f2d8f4a94c44e1753a3a2a5d67bebddc6fb",
         "type": "github"
       },
       "original": {
@@ -269,10 +247,31 @@
         "flake-parts": "flake-parts",
         "import-tree": "import-tree",
         "nix-index-database": "nix-index-database",
-        "nixarr": "nixarr",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
-        "nvf": "nvf"
+        "nvf": "nvf",
+        "sops-nix": "sops-nix",
+        "vpn-confinments": "vpn-confinments"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1770145881,
+        "narHash": "sha256-ktjWTq+D5MTXQcL9N6cDZXUf9kX8JBLLBLT0ZyOTSYY=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "17eea6f3816ba6568b8c81db8a4e6ca438b30b7c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "type": "github"
       }
     },
     "systems": {
@@ -290,39 +289,18 @@
         "type": "github"
       }
     },
-    "vpnconfinement": {
+    "vpn-confinments": {
       "locked": {
-        "lastModified": 1765634578,
-        "narHash": "sha256-Fujb9sn1cj+u/bzfo2RbQkcAvJ7Ch1pimJzFie4ptb4=",
+        "lastModified": 1767604552,
+        "narHash": "sha256-FddhMxnc99KYOZ/S3YNqtDSoxisIhVtJ7L4s8XD2u0A=",
         "owner": "Maroka-chan",
         "repo": "VPN-Confinement",
-        "rev": "f2989e1e3cb06c7185939e9ddc368f88b998616a",
+        "rev": "a6b2da727853886876fd1081d6bb2880752937f3",
         "type": "github"
       },
       "original": {
         "owner": "Maroka-chan",
         "repo": "VPN-Confinement",
-        "type": "github"
-      }
-    },
-    "website-builder": {
-      "inputs": {
-        "nixpkgs": [
-          "nixarr",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1753958235,
-        "narHash": "sha256-Rd27XQJKv8Z4BCr3gdbaHFd0TmumiGxdjGRzsEf/mOg=",
-        "owner": "rasmus-kirk",
-        "repo": "website-builder",
-        "rev": "00a14b7ae7baef2197978ba7c3fe72dfca7bc475",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rasmus-kirk",
-        "repo": "website-builder",
         "type": "github"
       }
     }

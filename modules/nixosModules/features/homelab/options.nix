@@ -50,19 +50,6 @@
               sub = "hp";
               port = toString config.services.homepage-dashboard.listenPort;
             }
-
-            rec {
-              icon = "${toLower name}.png";
-              name = "Transmission";
-              href = "https://${sub}.${domain}";
-              ping = href;
-              sub = "dl";
-              port = toString config.nixarr.transmission.uiPort;
-              widget = {
-                type = toLower name;
-                url = "http://localhost:${port}";
-              };
-            }
             rec {
               icon = "jellyfin.png";
               name = "Jellyfin";

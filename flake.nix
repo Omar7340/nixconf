@@ -19,13 +19,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixarr = {
-      url = "github:rasmus-kirk/nixarr";
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nix-index-database = {
-      url = "github:Mic92/nix-index-database";
+    vpn-confinments.url = "github:Maroka-chan/VPN-Confinement";
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
