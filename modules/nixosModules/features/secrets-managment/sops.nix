@@ -9,8 +9,8 @@
 
       sops.secrets.wg_conf = {
         sopsFile = "${inputs.self}/secrets/wg.conf.enc";
-        format = "binary";
-
+        key = "data";
+        format = "yaml";
         owner = "root";
         mode = "0400";
       };
