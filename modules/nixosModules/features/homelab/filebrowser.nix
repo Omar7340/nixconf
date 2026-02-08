@@ -1,8 +1,12 @@
-# TODO remove nixarr and use vanilla
 # FIX managment of permission
 {
   flake.nixosModules.homelab =
-    { pkgs, config, ... }:
+    {
+      pkgs,
+      config,
+      lib,
+      ...
+    }:
     let
       cfg = config.homelab;
     in
@@ -41,5 +45,26 @@
         };
 
       };
+
+      homelab.catalog =
+        let
+          cfg = config.homelab;
+          domain = cfg.domain;
+          inherit (lib.strings) toLower;
+        in
+        [
+          rec {
+            icon = "${toLower name}.png";
+            name = "BabelDrive";
+            href = "https://${sub}.${domain}";
+            ping = href;
+            sub = "bd";
+            port = toString cfg.babeldrive.port;
+            widget = {
+              type = "filebrowser";
+              url = "http://localhost:${port}";
+            };
+          }
+        ];
     };
 }

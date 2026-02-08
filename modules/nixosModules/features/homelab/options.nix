@@ -79,14 +79,6 @@
                 password = "";
               };
             }
-            rec {
-              icon = "filebrowser.png";
-              name = "FileBrowser";
-              href = "https://${sub}.${domain}";
-              ping = href;
-              sub = "fb";
-              port = toString config.homelab.babeldrive.port;
-            }
           ];
       };
     };
