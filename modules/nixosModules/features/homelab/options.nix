@@ -50,20 +50,7 @@
               sub = "hp";
               port = toString config.services.homepage-dashboard.listenPort;
             }
-            rec {
-              icon = "jellyfin.png";
-              name = "Jellyfin";
-              href = "https://${sub}.${domain}";
-              ping = href;
-              sub = "jf";
-              port = "8096";
-              widget = {
-                type = toLower name;
-                url = "http://localhost:${port}";
-                enableNowPlaying = true;
-                key = "e71e68a019bc4a258016cad6d01c3adc";
-              };
-            }
+
             rec {
               icon = "adguard-home.png";
               name = "AdGuard";
