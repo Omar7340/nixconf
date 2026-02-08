@@ -7,6 +7,8 @@
         inputs.sops-nix.nixosModules.sops
       ];
 
+      sops.defaultSopsFile = ./. + "${inputs.self}/secrets.yaml";
+
       sops.secrets.wg_conf = {
         sopsFile = "${inputs.self}/secrets/wg.conf.enc";
         key = "data";
