@@ -48,8 +48,9 @@
           enable = true;
           package = pkgs.transmission_4;
           webHome = pkgs.flood-for-transmission;
+          group = "media";
           settings = {
-            umask = "002";
+            umask = "022";
 
             rpc-bind-address = "192.168.15.1"; # Bind RPC/WebUI to VPN network namespace address
             rpc-whitelist = "127.0.0.1,192.168.*,10.*"; # Access through loopback within VPN network namespace
