@@ -13,6 +13,11 @@
             default = "babel";
           };
 
+          download-dir = mkOption {
+            type = types.str;
+            default = "/mnt/media";
+          };
+
           babeldrive = {
             port = mkOption {
               type = types.int;

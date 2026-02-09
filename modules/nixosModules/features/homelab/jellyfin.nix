@@ -4,7 +4,7 @@
     let
       jf_user = "jellyfin";
       jf_group = "media";
-      media_dir = "/mnt/media";
+      media_dir = config.homelab.download-dir;
       state_dir = "${media_dir}/.state";
     in
     {

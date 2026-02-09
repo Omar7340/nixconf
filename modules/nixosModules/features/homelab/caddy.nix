@@ -7,12 +7,16 @@
       baseDomain = cfg.domain;
 
       mkVHost =
-        { sub, port }:
+        {
+          sub,
+          ip ? "127.0.0.1",
+          port,
+        }:
         {
           name = "${sub}.${baseDomain}";
           value = {
             extraConfig = ''
-              reverse_proxy localhost:${toString port}
+              reverse_proxy ${toString ip}:${toString port}
             '';
           };
         };
@@ -32,6 +36,7 @@
             map (builtins.intersectAttrs {
               sub = null;
               port = null;
+              ip = null;
             }) cfg.catalog
           )
         );

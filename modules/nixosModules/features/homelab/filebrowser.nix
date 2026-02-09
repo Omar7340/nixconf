@@ -54,7 +54,7 @@
         in
         [
           rec {
-            icon = "${toLower name}.png";
+            icon = "filebrowser.png";
             name = "BabelDrive";
             href = "https://${sub}.${domain}";
             ping = href;
