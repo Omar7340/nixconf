@@ -216,6 +216,26 @@
         "type": "github"
       }
     },
+    "noctalia": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1770678189,
+        "narHash": "sha256-cJBi6Xn5kIbCcspTrcuM7w/YPDHECNuET2yA1wvX1N0=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "84b994ebae1e2e0a9a37ac21e474d08ae9a11b0d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "type": "github"
+      }
+    },
     "nvf": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -249,6 +269,7 @@
         "nix-index-database": "nix-index-database",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
+        "noctalia": "noctalia",
         "nvf": "nvf",
         "sops-nix": "sops-nix",
         "vpn-confinments": "vpn-confinments"
