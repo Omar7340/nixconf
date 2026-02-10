@@ -17,6 +17,7 @@
 
         extensions = [
           "eimadpbcbfnmbkopoojfekhnkhdbieeh" # Dark Reader
+          "nngceckbapebfimnlniiiahkandclblb" # Bitwarden
           "cjpalhdlnbpafiamejdnhcphjbkeiagm" # Ublock Origin
         ];
       };
