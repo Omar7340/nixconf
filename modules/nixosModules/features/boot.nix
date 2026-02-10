@@ -2,24 +2,34 @@
   flake.nixosModules.boot =
     { pkgs, lib, ... }:
     {
-      boot = {
-        plymouth = {
-          enable = true;
-          theme = lib.mkForce "rings"; # force due to stylix ttrying to override it
-          themePackages = with pkgs; [
-            (adi1090x-plymouth-themes.override { selected_themes = [ "rings" ]; })
+      boot =
+        let
+          choosedTheme = "cuts";
+        in
+        {
+          plymouth = {
+            enable = true;
+            theme = lib.mkForce choosedTheme; # force due to stylix ttrying to override it
+            themePackages = with pkgs; [
+              (adi1090x-plymouth-themes.override { selected_themes = [ choosedTheme ]; })
+            ];
+
+          };
+
+          consoleLogLevel = 0;
+          initrd.verbose = false;
+          loader.timeout = 0;
+          initrd.kernelModules = [ "nvidia" ];
+          kernelParams = [
+            "nvidia_drm.modeset=1"
+            "quiet"
+            "splash"
+            "boot.shell_on_fail"
+            "loglevel=3"
+            "rd.systemd.show_status=false"
+            "rd.udev.log_level=3"
+            "udev.log_priority=3"
           ];
-
         };
-
-        consoleLogLevel = 3;
-        initrd.verbose = false;
-        kernelParams = [
-          "quiet"
-          "udev.log_level=3"
-          "systemd.show_status=auto"
-        ];
-        loader.timeout = 0;
-      };
     };
 }

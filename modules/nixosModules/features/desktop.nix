@@ -36,9 +36,13 @@
         };
       };
 
+      hardware.i2c.enable = true;
+
       environment.systemPackages = with pkgs; [
         xwayland-satellite
         inputs.noctalia.packages.${stdenv.hostPlatform.system}.default
+        ddcutil
+        brightnessctl
         alacritty
       ];
     };
