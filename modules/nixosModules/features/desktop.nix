@@ -37,6 +37,7 @@
       };
 
       environment.systemPackages = with pkgs; [
+        xwayland-satellite
         inputs.noctalia.packages.${stdenv.hostPlatform.system}.default
         alacritty
         pear-desktop
