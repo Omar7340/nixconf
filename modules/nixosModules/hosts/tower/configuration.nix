@@ -6,6 +6,7 @@
       self.nixosModules.base
       self.nixosModules.multimedia
       self.nixosModules.desktop
+      self.nixosModules.gaming
       self.nixosModules.boot
       self.nixosModules.nvf
     ];
