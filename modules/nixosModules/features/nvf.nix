@@ -15,8 +15,8 @@
               enable = true;
               #            name = "tokyonight";
               #            style = "storm";
-              name = "oxocarbon";
-              style = "dark";
+              #              name = "oxocarbon";
+              #              style = "dark";
             };
 
             visuals = {

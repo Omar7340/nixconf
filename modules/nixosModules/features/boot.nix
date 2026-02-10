@@ -1,11 +1,11 @@
 {
   flake.nixosModules.boot =
-    { pkgs, ... }:
+    { pkgs, lib, ... }:
     {
       boot = {
         plymouth = {
           enable = true;
-          theme = "rings";
+          theme = lib.mkForce "rings"; # force due to stylix ttrying to override it
           themePackages = with pkgs; [
             (adi1090x-plymouth-themes.override { selected_themes = [ "rings" ]; })
           ];
