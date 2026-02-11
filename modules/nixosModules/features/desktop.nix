@@ -25,13 +25,8 @@
         enable = true;
         settings = {
           default_session = {
-            command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --cmd niri-session";
+            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%A %d %B %Y à %Hh%M' --cmd niri-session";
             user = "greeter";
-          };
-
-          initial_session = {
-            command = "niri-session";
-            user = "kage";
           };
         };
       };
@@ -43,7 +38,10 @@
         inputs.noctalia.packages.${stdenv.hostPlatform.system}.default
         ddcutil
         brightnessctl
+        playerctl
+        bitwarden-desktop
         alacritty
+        fuzzel
       ];
     };
 }
