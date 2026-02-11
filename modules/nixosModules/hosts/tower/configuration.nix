@@ -4,6 +4,7 @@
     modules = [
       self.nixosModules.hostTower
       self.nixosModules.base
+      self.nixosModules.dev
       self.nixosModules.multimedia
       self.nixosModules.desktop
       self.nixosModules.gaming
