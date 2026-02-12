@@ -1,10 +1,10 @@
 { inputs, self, ... }:
 {
   flake.nixosModules.desktop =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     {
       imports = [
-        inputs.home-manager.nixosModules.home-manager
+        inputs.hjem.nixosModules.default
         inputs.stylix.nixosModules.stylix
         self.nixosModules.browsers
         self.nixosModules.theme
@@ -32,6 +32,7 @@
       };
 
       hardware.i2c.enable = true;
+      users.users.${config.preferences.user.name}.extraGroups = [ "i2c" ];
 
       environment.systemPackages = with pkgs; [
         xwayland-satellite
