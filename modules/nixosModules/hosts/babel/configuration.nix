@@ -4,7 +4,7 @@
     modules = [
       self.nixosModules.hostBabel
       self.nixosModules.base
-      self.nixosModules.nvf
+      self.nixosModules.dev
       self.nixosModules.homelab
     ];
   };
