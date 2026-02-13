@@ -43,6 +43,7 @@
         bitwarden-desktop
         alacritty
         fuzzel
+        bibata-cursors
       ];
     };
 }
