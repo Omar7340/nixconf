@@ -34,6 +34,9 @@
       hardware.i2c.enable = true;
       users.users.${config.preferences.user.name}.extraGroups = [ "i2c" ];
 
+      # Enable networking
+      networking.networkmanager.enable = true;
+
       environment.systemPackages = with pkgs; [
         xwayland-satellite
         inputs.noctalia.packages.${stdenv.hostPlatform.system}.default

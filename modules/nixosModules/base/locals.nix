@@ -18,6 +18,11 @@
         LC_TIME = "fr_FR.UTF-8";
       };
 
+      services.xserver.xkb = {
+        layout = "fr";
+        variant = "";
+      };
+
       console.keyMap = "fr";
 
     };

@@ -18,25 +18,7 @@
     { config, pkgs, ... }:
 
     {
-
-      # Bootloader.
-      boot.loader.systemd-boot.enable = true;
-      boot.loader.efi.canTouchEfiVariables = true;
-
       networking.hostName = "tower";
-      # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-      # Enable networking
-      networking.networkmanager.enable = true;
-
-      # Configure keymap in X11
-      services.xserver.xkb = {
-        layout = "fr";
-        variant = "";
-      };
-
-      # Configure console keymap
-      console.keyMap = "fr";
 
       # Define a user account. Don't forget to set a password with ‘passwd’.
       users.users.kage = {
