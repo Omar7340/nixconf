@@ -13,16 +13,16 @@
 
         fonts = {
           serif = {
-            package = pkgs.nerd-fonts.iosevka-term-slab;
-            name = "IosevkaTermSlab Nerd Font";
+            package = pkgs.nerd-fonts.fira-code;
+            name = "Fira Code Nerd Font";
           };
           sansSerif = {
-            package = pkgs.nerd-fonts.iosevka;
-            name = "Iosevka Nerd Font";
+            package = pkgs.nerd-fonts.fira-code;
+            name = "Fira Code Nerd Font";
           };
           monospace = {
-            package = pkgs.nerd-fonts.iosevka-term;
-            name = "IosevkaTerm Nerd Font";
+            package = pkgs.nerd-fonts.fira-code;
+            name = "Fira Code Nerd Font";
           };
           emoji = {
             package = pkgs.noto-fonts-color-emoji;
