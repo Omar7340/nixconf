@@ -8,6 +8,7 @@
         inputs.stylix.nixosModules.stylix
         self.nixosModules.browsers
         self.nixosModules.theme
+        self.nixosModules.home
       ];
 
       fonts.packages = with pkgs; [
