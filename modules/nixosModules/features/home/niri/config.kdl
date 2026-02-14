@@ -130,6 +130,7 @@ binds {
     Mod+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
 
     Mod+W hotkey-overlay-title="Change Wallpaper" { spawn-sh "noctalia-shell ipc call wallpaper random"; }
+    Mod+X hotkey-overlay-title="Zoom on the screen (woomer)" { spawn "woomer"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
