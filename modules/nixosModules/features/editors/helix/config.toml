@@ -2,8 +2,17 @@ theme = "ao"
 
 [editor]
 line-number = "relative"
+shell = ["alacritty", "--command"]
+
 
 [editor.cursor-shape]
 insert = "bar"
 normal = "underline"
 select = "underline"
+
+[editor.indent-guides]
+render = true
+
+[editor.lsp]
+display-messages = true
+display-inlay-hints = true

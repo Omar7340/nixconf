@@ -3,7 +3,13 @@
     { pkgs, config, ... }:
     {
 
-      environment.systemPackages = with pkgs; [ helix ];
+      environment.systemPackages = with pkgs; [
+        helix
+        markdown-oxide
+        taplo
+        yaml-language-server
+      ];
+
       hjem.users.${config.preferences.user.name} = {
         files = {
           ".config/helix/languages.toml".source = ./languages.toml;

@@ -2,4 +2,4 @@
 name = "nix"
 auto-format = true
 file-types = ["nix"]
-formatter = { command = "alejandra" }
+formatter = { command = "alejandra", args = ["%{buffer_name}"] }
