@@ -9,6 +9,7 @@
 
         targets = {
           plymouth.enable = false;
+          nvf.enable = false;
         };
 
         fonts = {

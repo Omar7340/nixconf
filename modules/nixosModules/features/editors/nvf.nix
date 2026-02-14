@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake.nixosModules.nvf =
-    { ... }:
+    { pkgs, ... }:
     {
       imports = [ inputs.nvf.nixosModules.default ];
       programs.nvf = {
@@ -13,15 +13,14 @@
           vim = {
             theme = {
               enable = true;
-              #            name = "tokyonight";
-              #            style = "storm";
-              #              name = "oxocarbon";
-              #              style = "dark";
+              name = "oxocarbon";
+              style = "dark";
             };
 
             visuals = {
               nvim-web-devicons.enable = true;
               nvim-cursorline.enable = true;
+              indent-blankline.enable = true;
             };
 
             statusline.lualine.enable = true;

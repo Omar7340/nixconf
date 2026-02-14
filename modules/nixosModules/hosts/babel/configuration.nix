@@ -51,7 +51,7 @@
       };
 
       users.users.root.openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICJqgDOdY6OLzXCTHRuWAVHP8zEJ8PYtqJUfrLeTJKSA nixos@nixos"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEp5ExRYPh7Jl+YVTrigl+emwUcQwAGGfeM/C5SqRKoo kage@tower"
       ];
 
       system.stateVersion = "25.05";

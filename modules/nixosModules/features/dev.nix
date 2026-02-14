@@ -5,8 +5,11 @@
     {
       imports = [
         self.nixosModules.nvf
+        self.nixosModules.helix
       ];
       environment.systemPackages = with pkgs; [
+        zellij
+        lazygit
         yazi
         btop
       ];

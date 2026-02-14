@@ -33,6 +33,8 @@
         prismlauncher
         steam-run
         discord
+        dolphin-emu
+        dualsensectl
       ];
     };
 }

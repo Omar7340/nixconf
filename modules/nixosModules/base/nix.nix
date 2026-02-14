@@ -37,7 +37,10 @@
 
       environment.systemPackages = with pkgs; [
         statix
+        nil
+        nixd
         manix
+        alejandra
         nix-inspect
       ];
     };
