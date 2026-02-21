@@ -6,8 +6,12 @@
       environment.systemPackages = with pkgs; [
         helix
         markdown-oxide
+        # LSP
+        nil
+        nixd
         taplo
         yaml-language-server
+        lua-language-server
       ];
 
       hjem.users.${config.preferences.user.name} = {

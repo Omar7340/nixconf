@@ -2,6 +2,7 @@ theme = "ao"
 
 [editor]
 line-number = "relative"
+cursorline = true
 shell = ["alacritty", "--command"]
 
 
@@ -16,3 +17,6 @@ render = true
 [editor.lsp]
 display-messages = true
 display-inlay-hints = true
+
+[keys.normal]
+"A-f" = ":fmt"
