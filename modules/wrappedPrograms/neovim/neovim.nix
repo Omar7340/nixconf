@@ -32,11 +32,14 @@
         telescope-nvim
         oil-nvim
         which-key-nvim
+        blink-cmp
+        colorful-menu-nvim
 
         # lsp
         nvim-lspconfig
         nvim-treesitter-textobjects
         nvim-treesitter.withAllGrammars
+        lspkind-nvim
 
         # visual
         nvim-web-devicons
