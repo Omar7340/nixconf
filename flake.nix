@@ -47,6 +47,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    wrappers = {
+      url = "github:BirdeeHub/nix-wrapper-modules";
+    };
+
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
   };

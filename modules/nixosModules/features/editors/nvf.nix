@@ -5,7 +5,7 @@
     {
       imports = [ inputs.nvf.nixosModules.default ];
       programs.nvf = {
-        enable = true;
+        # enable = true;
 
         # Your settings need to go into the settings attribute set
         # most settings are documented in the appendix
@@ -33,6 +33,11 @@
 
             lsp.enable = true;
             lsp.formatOnSave = true;
+
+            notes.neorg = {
+              treesitter.enable = true;
+              setupOpts.load."core-default".enable = true;
+            };
 
             treesitter.enable = true;
             treesitter.context.enable = true;
