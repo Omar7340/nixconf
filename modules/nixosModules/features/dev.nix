@@ -4,7 +4,8 @@
     { pkgs, ... }:
     {
       imports = [
-        self.nixosModules.nvf
+        # self.nixosModules.nvf
+        self.nixosModules.nixvim
         self.nixosModules.helix
       ];
       environment.systemPackages = with pkgs; [
@@ -12,7 +13,7 @@
         lazygit
         yazi
         btop
-        self.packages.${pkgs.system}.neovim
+        # self.packages.${pkgs.system}.neovim
       ];
     };
 }

@@ -41,6 +41,10 @@
         nvim-treesitter.withAllGrammars
         lspkind-nvim
 
+        # TODO Lazygit + Neorg
+        neorg
+        neorg-telescope
+
         # visual
         nvim-web-devicons
         oxocarbon-nvim
