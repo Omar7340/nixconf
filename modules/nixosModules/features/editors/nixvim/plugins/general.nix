@@ -4,14 +4,36 @@
     {
       programs.nixvim = {
 
+        keymaps = [
+          {
+            key = "<leader><leader>";
+            action.__raw = ''
+              function()
+                require'hop'.hint_char1({
+                  direction = require'hop.hint'.HintDirection.AFTER_CURSOR,
+                  current_line_only = true
+                })
+              end
+            '';
+            options.remap = true;
+          }
+          {
+            key = "<leader>e";
+            action = "<cmd>Oil<CR>";
+            options.desc = "Open File Explorer (Oil)";
+          }
+          {
+            key = "<leader>gg";
+            action = "<cmd>LazyGit<CR>";
+          }
+        ];
+
         colorschemes.everforest = {
           enable = true;
           autoLoad = true;
         };
 
         plugins = {
-          # Lazy loading
-          lz-n.enable = true;
 
           web-devicons.enable = true;
           which-key = {
@@ -34,9 +56,11 @@
             settings.user_default_options.names = false;
           };
 
+          lazygit.enable = true;
+          hop.enable = true;
+
           oil = {
             enable = true;
-            lazyLoad.settings.cmd = "Oil";
 
             settings = {
               default_file_explorer = true;

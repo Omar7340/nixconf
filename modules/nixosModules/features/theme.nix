@@ -10,6 +10,7 @@
         targets = {
           plymouth.enable = false;
           nvf.enable = false;
+          nixvim.enable = false;
         };
 
         fonts = {
