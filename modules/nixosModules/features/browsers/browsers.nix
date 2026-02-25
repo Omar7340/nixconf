@@ -6,6 +6,8 @@
         enable = true;
         extraOpts = {
           "BrowserSignin" = 0;
+          "DnsOverHttpsMode" = "secure";
+          "DnsOverHttpsTemplates" = "https://dns.cloudflare.com/dns-query";
           "SyncDisabled" = true;
           "PasswordManagerEnabled" = false;
           "SpellcheckEnabled" = true;
