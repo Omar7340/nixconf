@@ -13,6 +13,7 @@
               "nvim-treesitter"
               "lualine.nvim"
               "oil.nvim"
+              "conform.nvim"
 
               # `queries/lua/highlights.scm` conflicts with nvim-treesitter-grammars
               "snacks.nvim"
