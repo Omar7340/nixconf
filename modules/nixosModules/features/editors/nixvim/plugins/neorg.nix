@@ -20,7 +20,9 @@
         enable = true;
         telescopeIntegration.enable = true;
 
-        settings = {
+        settings = let
+          personal_workspace = "perso";
+        in {
           load = {
             "core.concealer" = {
               config = {
@@ -33,8 +35,16 @@
             "core.dirman" = {
               config = {
                 workspaces = {
-                  perso = "~/Notes/perso";
+                  "${personal_workspace}" = "~/Notes/${personal_workspace}";
                 };
+                default_workspace = "${personal_workspace}";
+              };
+            };
+            "core.journal" = {
+              config = {
+                journal_folder = "journal";
+                strategy = "flat";
+                workspace = "${personal_workspace}";
               };
             };
           };
