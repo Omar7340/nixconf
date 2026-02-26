@@ -14,6 +14,12 @@
           action = ":Neorg workspace perso<CR>";
           options.desc = "Go to Personal Notes Workspaces (Neorg)";
         }
+        {
+          mode = "n";
+          key = "<leader>nj";
+          action = ":Neorg journal today<CR>";
+          options.desc = "New journal entry for today (Neorg)";
+        }
       ];
 
       plugins.neorg = {
