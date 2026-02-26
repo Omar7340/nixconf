@@ -1,54 +1,60 @@
-{ inputs, self, ... }:
 {
-  flake.nixosModules.desktop =
-    { pkgs, config, ... }:
-    {
-      imports = [
-        inputs.hjem.nixosModules.default
-        inputs.stylix.nixosModules.stylix
-        self.nixosModules.browsers
-        self.nixosModules.theme
-        self.nixosModules.home
-      ];
+  inputs,
+  self,
+  ...
+}: {
+  flake.nixosModules.desktop = {
+    pkgs,
+    config,
+    ...
+  }: {
+    imports = [
+      inputs.hjem.nixosModules.default
+      inputs.stylix.nixosModules.stylix
+      self.nixosModules.browsers
+      self.nixosModules.theme
+      self.nixosModules.home
+      self.nixosModules.bureautique
+    ];
 
-      fonts.packages = with pkgs; [
-        nerd-fonts.jetbrains-mono
-        corefonts
-        unifont
-      ];
+    fonts.packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+      corefonts
+      unifont
+    ];
 
-      # needed for noctalia
-      programs.niri.enable = true;
-      services.upower.enable = true;
-      services.tuned.enable = true;
+    # needed for noctalia
+    programs.niri.enable = true;
+    services.upower.enable = true;
+    services.tuned.enable = true;
 
-      services.greetd = {
-        enable = true;
-        settings = {
-          default_session = {
-            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%A %d %B %Y à %Hh%M' --cmd niri-session";
-            user = "greeter";
-          };
+    services.greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%A %d %B %Y à %Hh%M' --cmd niri-session";
+          user = "greeter";
         };
       };
-
-      hardware.i2c.enable = true;
-      users.users.${config.preferences.user.name}.extraGroups = [ "i2c" ];
-
-      # Enable networking
-      networking.networkmanager.enable = true;
-
-      environment.systemPackages = with pkgs; [
-        xwayland-satellite
-        inputs.noctalia.packages.${stdenv.hostPlatform.system}.default
-        ddcutil
-        brightnessctl
-        playerctl
-        bitwarden-desktop
-        alacritty
-        fuzzel
-        woomer
-        bibata-cursors
-      ];
     };
+
+    hardware.i2c.enable = true;
+    users.users.${config.preferences.user.name}.extraGroups = ["i2c"];
+
+    # Enable networking
+    networking.networkmanager.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      xwayland-satellite
+      inputs.noctalia.packages.${stdenv.hostPlatform.system}.default
+      ddcutil
+      brightnessctl
+      playerctl
+      bitwarden-desktop
+      alacritty
+      fuzzel
+      woomer
+      bibata-cursors
+    ];
+  };
 }
