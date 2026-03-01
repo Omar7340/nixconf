@@ -10,6 +10,14 @@ input {
     warp-mouse-to-focus
 }
 
+// TV Toshiba
+output "Vestel Elektronik Sanayi ve Ticaret A. S. 55 FHD_LCD-TV Unknown" {
+    mode "1920x1080@59.939"
+    scale 1
+    transform "normal"
+}
+
+
 output "HP Inc. HP 24o CNK9242BCV" {
     mode "1920x1080@60.000"
     scale 1
@@ -28,7 +36,7 @@ layout {
         proportion 1.0
     }
 
-    preset-window-heights { 
+    preset-window-heights {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
@@ -93,7 +101,7 @@ window-rule {
     match title="^Mode PIP (Picture-in-Picture)$"
     match app-id="^$"
     open-floating true
-    
+
     focus-ring {
       off
     }
