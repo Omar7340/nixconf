@@ -11,16 +11,29 @@
       package = pkgs.openrgb-with-all-plugins;
       motherboard = "amd";
     };
-    environment.systemPackages = with pkgs; [
-      i2c-tools
-    ];
-    boot.kernelModules = ["i2c-dev" "i2c-piix4"];
+
+    systemd.services.openrgb-client = {
+      description = "Script Python qui demarre un client OpenRGB pour lancer une animation";
+
+      after = ["openrgb.service"];
+      wantedBy = ["multi-user.target"];
+
+      serviceConfig = {
+        ExecStart = "${pkgs.python3}/bin/python /var/lib/OpenRGB/main.py";
+        Restart = "on-failure";
+        RestartSec = "5s";
+      };
+    };
+
     users.groups.i2c.members = [config.preferences.user.name];
 
     networking.firewall = {
       allowedUDPPorts = [5568 6454 21324 6742]; # WLED default port
     };
-    # TODO see startup profile
-    # FIX issue when starting, doesnt discover WLED (you need to stop system service and run openrgb as sudo) need more digging
+
+    systemd.tmpfiles.rules = [
+      "L+ '/var/lib/OpenRGB/OpenRGB.json' - - - - ${./OpenRGB/OpenRGB.json}"
+      "L+ '/var/lib/OpenRGB/main.py' - - - - ${./OpenRGB/fill_random.py}"
+    ];
   };
 }
