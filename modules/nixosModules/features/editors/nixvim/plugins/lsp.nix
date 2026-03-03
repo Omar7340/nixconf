@@ -11,6 +11,7 @@
             config.settings.diagnostics.globals = ["vim"];
           };
           pyright.enable = true;
+          nixd.enable = true;
         };
 
         keymaps =
