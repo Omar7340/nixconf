@@ -10,6 +10,7 @@
             enable = true;
             config.settings.diagnostics.globals = ["vim"];
           };
+          pyright.enable = true;
         };
 
         keymaps =
