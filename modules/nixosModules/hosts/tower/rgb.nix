@@ -12,14 +12,20 @@
       motherboard = "amd";
     };
 
-    systemd.services.openrgb-client = {
+    systemd.services.openrgb-client = let
+      pythonEnv = pkgs.python3.withPackages (ps:
+        with ps; [
+          openrgb-python
+        ]);
+      script = pkgs.writeText "fill_random.py" (builtins.readFile ./OpenRGB/fill_random.py);
+    in {
       description = "Script Python qui demarre un client OpenRGB pour lancer une animation";
 
       after = ["openrgb.service"];
       wantedBy = ["multi-user.target"];
 
       serviceConfig = {
-        ExecStart = "${pkgs.python3}/bin/python /var/lib/OpenRGB/main.py";
+        ExecStart = "${pythonEnv}/bin/python ${script}";
         Restart = "on-failure";
         RestartSec = "5s";
       };
@@ -33,7 +39,6 @@
 
     systemd.tmpfiles.rules = [
       "L+ '/var/lib/OpenRGB/OpenRGB.json' - - - - ${./OpenRGB/OpenRGB.json}"
-      "L+ '/var/lib/OpenRGB/main.py' - - - - ${./OpenRGB/fill_random.py}"
     ];
   };
 }
