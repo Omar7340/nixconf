@@ -1,6 +1,6 @@
 import time, random, colorsys
 from openrgb import OpenRGBClient
-from openrgb.utils import RGBColor
+from openrgb.utils import ModeData, RGBColor
 
 def get_random_rgb(brightness=0.4):
     """Génère une couleur aléatoire au format RGB tuple (0-255)."""
@@ -11,6 +11,11 @@ def effect_fill(speed=0.5, fps=40):
     try:
         client = OpenRGBClient()
         if not client.devices: return print("Aucun périphérique détecté.")
+
+        client.update()
+        for d in client.devices:
+            d.update()
+            d.set_mode(mode="Direct")
 
         start_time = time.time()
         current_color = get_random_rgb()

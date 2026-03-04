@@ -4,6 +4,11 @@
     config,
     ...
   }: {
+    environment.systemPackages = with pkgs; [
+      i2c-tools
+    ];
+    boot.kernelModules = ["i2c-dev" "i2c-piix4"];
+
     services.hardware.deepcool-digital-linux.enable = true;
 
     services.hardware.openrgb = {
