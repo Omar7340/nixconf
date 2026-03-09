@@ -23,6 +23,11 @@
       vlc
       pear-desktop
       freecadWayland
+      (mpv.override {
+        scripts = [
+          pkgs.mpvScripts.uosc
+        ];
+      })
     ];
   };
 }
