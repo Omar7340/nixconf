@@ -1,6 +1,6 @@
 {
   flake.nixosModules.multimedia = {
-    self,
+    config,
     pkgs,
     ...
   }: let
@@ -17,12 +17,29 @@
           --prefix __EGL_VENDOR_LIBRARY_FILENAMES : ${pkgs.mesa}/share/glvnd/egl_vendor.d/50_mesa.json \
       '';
     };
+
+    # FIX Use PR for now. still being reviewed
+    # issue: https://github.com/NixOS/nixpkgs/pull/495746
+    nixpkgs-495746-drv = pkgs.applyPatches {
+      src = pkgs.path;
+      patches = [
+        (pkgs.fetchpatch2 {
+          url = "https://github.com/NixOS/nixpkgs/pull/495746.patch";
+          sha256 = "sha256-RjJp56dXGPRBPQNWdBe/Je8yMRsrteWhNM9yZ6cDo7Y=";
+        })
+      ];
+    };
+    nixpkgs-495746 = import nixpkgs-495746-drv {
+      inherit (pkgs.stdenv) system;
+      config.allowUnfree = true;
+    };
   in {
     environment.systemPackages = with pkgs; [
       qbittorrent
       vlc
       pear-desktop
       freecadWayland
+      nixpkgs-495746.orca-slicer
       (mpv.override {
         scripts = [
           pkgs.mpvScripts.uosc
