@@ -55,6 +55,7 @@
       fuzzel
       woomer
       bibata-cursors
+      thunar
     ];
   };
 }
