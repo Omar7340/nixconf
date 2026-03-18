@@ -13,6 +13,7 @@
       self.nixosModules.gaming
       self.nixosModules.boot
       self.nixosModules.towerRGB
+      self.nixosModules.ia
     ];
   };
 
