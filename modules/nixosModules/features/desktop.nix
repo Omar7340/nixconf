@@ -24,19 +24,23 @@
     ];
 
     # needed for noctalia
-    programs.niri.enable = true;
-    services.upower.enable = true;
-    services.tuned.enable = true;
+    #programs.niri.enable = true;
+    #services.upower.enable = true;
+    #services.tuned.enable = true;
 
-    services.greetd = {
+    # Enable Plasma
+    services.desktopManager.plasma6.enable = true;
+
+    # Default display manager for Plasma
+    services.displayManager.sddm = {
       enable = true;
-      settings = {
-        default_session = {
-          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --time-format '%A %d %B %Y à %Hh%M' --cmd niri-session";
-          user = "greeter";
-        };
-      };
+
+      # To use Wayland (Experimental for SDDM)
+      wayland.enable = true;
     };
+
+    # Optionally enable xserver
+    services.xserver.enable = true;
 
     hardware.i2c.enable = true;
     users.users.${config.preferences.user.name}.extraGroups = ["i2c"];
@@ -45,17 +49,10 @@
     networking.networkmanager.enable = true;
 
     environment.systemPackages = with pkgs; [
-      xwayland-satellite
-      inputs.noctalia.packages.${stdenv.hostPlatform.system}.default
-      ddcutil
-      brightnessctl
-      playerctl
       bitwarden-desktop
       alacritty
-      fuzzel
       woomer
       bibata-cursors
-      thunar
     ];
   };
 }
