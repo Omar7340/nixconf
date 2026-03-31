@@ -5,6 +5,7 @@
       xournalpp
       pdfarranger
       libreoffice-qt-fresh
+      calibre
     ];
   };
 }
