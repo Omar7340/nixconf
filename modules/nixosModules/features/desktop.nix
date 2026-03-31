@@ -51,8 +51,9 @@
     environment.systemPackages = with pkgs; [
       bitwarden-desktop
       alacritty
-      woomer
       bibata-cursors
+      kdePackages.kamoso
+      kdePackages.plasma-browser-integration
     ];
   };
 }

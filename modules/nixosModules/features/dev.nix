@@ -13,6 +13,7 @@
         lazygit
         yazi
         btop
+                kitty
         # self.packages.${pkgs.system}.neovim
       ];
     };
