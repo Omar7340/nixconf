@@ -42,8 +42,6 @@
         device = "/dev/disk/by-uuid/2AF6864AF686166B";
         fsType = "ntfs";
         options = [
-          "users"
-          "x-gvfs-show"
           "nofail"
         ];
       };
@@ -52,8 +50,6 @@
         device = "/dev/disk/by-uuid/3e977eb5-baa8-4a58-b378-ca28f16b06d3";
         fsType = "ext4";
         options = [
-          "users"
-          "x-gvfs-show"
           "nofail"
         ];
       };
