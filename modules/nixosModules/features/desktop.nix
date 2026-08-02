@@ -50,7 +50,6 @@
     networking.networkmanager.enable = true;
 
     environment.systemPackages = with pkgs; [
-      bitwarden-desktop
       alacritty
       bibata-cursors
       kdePackages.kamoso
