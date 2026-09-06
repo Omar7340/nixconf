@@ -9,5 +9,9 @@
     };
     open-webui.enable = false;
   };
-  environment.systemPackages = with pkgs; [opencode codex];
+  environment.systemPackages = with pkgs; [
+    opencode
+    codex
+    herdr
+  ];
 }

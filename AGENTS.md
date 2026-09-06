@@ -13,6 +13,10 @@ This repository is a multi-host NixOS flake. `flake.nix` declares inputs, while 
 - `statix check .` reports common Nix antipatterns.
 - `nix flake update` refreshes locked inputs; review and commit the resulting `flake.lock` changes intentionally.
 
+### Efficient Command Output for Agents
+
+For automated sessions, avoid animated output that repeatedly redraws progress. Prefer `nh os switch --no-nom -R path:/etc/nixos#tower` (adjust the host as needed) to emit stable Nix logs. Concise modes must retain exit status, warnings, errors, and the final result. If output is ambiguous or a command fails, rerun it with full logs or `--show-trace`. After activation, verify the system generation and affected services.
+
 ## Coding Style & Naming Conventions
 
 Use Alejandra formatting and two-space indentation in Nix files. Prefer small, focused modules with descriptive lowercase filenames (for example, `features/homelab/jellyfin.nix`). Use camelCase for Nix option names and follow existing upstream option naming when configuring services. Keep host-only hardware and disk settings within the relevant host directory rather than reusable modules.
