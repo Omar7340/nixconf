@@ -1,64 +1,49 @@
 {
-  flake.nixosModules.homelab =
-    { config, pkgs, ... }:
-
-    {
-      services.glances.enable = true;
-
-      services.homepage-dashboard = {
-        enable = true;
-
-        allowedHosts = "hp.babel.local";
-
-        widgets = [
-          {
-            glances = {
-              url = "http://localhost:61208";
-              metric = "info";
-              version = 4;
-              cpu = true;
-              cputemp = true;
-              uptime = true;
-              mem = true;
-              disk = [
-                "/"
-                "/mnt/media"
-              ];
-              expanded = true;
-              label = "Système";
-            };
-          }
-          {
-            datetime = {
-              locale = "fr";
-              format = {
-                dateStyle = "long";
-                timeStyle = "short";
-              };
-            };
-          }
-        ];
-
-        services =
-          let
-            catalog = builtins.filter (item: item.name != "Homepage") config.homelab.catalog;
-            mkServices =
-              services:
-              map (item: {
-                "${item.name}" = (
-                  builtins.removeAttrs item [
-                    "sub"
-                    "port"
-                    "name"
-                  ]
-                );
-              }) services;
-          in
-          [
-            {
-              "Homelab" = mkServices catalog;
-            }
-          ];
-      };
+  config,
+  lib,
+  ...
+}: let
+  cfg = config.homelab;
+  toDashboardEntry = service: {
+    ${service.name} = lib.filterAttrs (_: value: value != null) {
+      inherit (service) icon;
+      href = "https://${service.subdomain}.${cfg.domain}${service.path}";
+      ping = "https://${service.subdomain}.${cfg.domain}${service.path}";
+      inherit (service) widget;
     };
+  };
+in {
+  services = {
+    glances.enable = true;
+    homepage-dashboard = {
+      enable = true;
+      allowedHosts = "hp.${cfg.domain}";
+      widgets = [
+        {
+          glances = {
+            url = "http://localhost:61208";
+            metric = "info";
+            version = 4;
+            cpu = true;
+            cputemp = true;
+            uptime = true;
+            mem = true;
+            disk = ["/" cfg.downloadDir];
+            expanded = true;
+            label = "Système";
+          };
+        }
+        {
+          datetime = {
+            locale = "fr";
+            format = {
+              dateStyle = "long";
+              timeStyle = "short";
+            };
+          };
+        }
+      ];
+      services = [{Homelab = map toDashboardEntry (builtins.filter (service: service.name != "Homepage") cfg.catalog);}];
+    };
+  };
 }

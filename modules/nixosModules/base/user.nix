@@ -1,20 +1,12 @@
-{
-  flake.nixosModules.base =
-    { lib, ... }:
-    let
-      inherit (lib) mkOption types;
-    in
-    {
-      options.preferences = {
-        user.name = mkOption {
-          type = types.str;
-          default = "kage";
-        };
-        user.mail = mkOption {
-          type = types.str;
-          default = "kage@localhost.local";
-        };
-      };
-
+{lib, ...}: {
+  options.nixconf.user = {
+    name = lib.mkOption {
+      type = lib.types.str;
+      default = "kage";
     };
+    email = lib.mkOption {
+      type = lib.types.str;
+      default = "kage@localhost.local";
+    };
+  };
 }

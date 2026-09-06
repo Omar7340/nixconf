@@ -1,76 +1,75 @@
-{ inputs, self, ... }:
 {
-  flake.wrappers.neovim =
-    {
-      wlib,
-      pkgs,
-      ...
-    }:
-    {
-      imports = [ wlib.wrapperModules.neovim ];
+  inputs,
+  self,
+  ...
+}: {
+  flake.lib.wrappers.neovim = {
+    wlib,
+    pkgs,
+    ...
+  }: {
+    imports = [wlib.wrapperModules.neovim];
 
-      settings.config_directory = ./config;
-      settings.aliases = [
-        "vim"
-        "vi"
-      ];
+    settings.config_directory = ./config;
+    settings.aliases = [
+      "vim"
+      "vi"
+    ];
 
-      specs.initLua = {
-        data = null;
-        before = [ "MAIN_INIT" ];
-        config = ''
-          require('init')
-          require('lz.n').load('plugins')
-        '';
-      };
-
-      specs.general = with pkgs.vimPlugins; [
-        lz-n
-
-        # utils
-        plenary-nvim
-        telescope-nvim
-        oil-nvim
-        which-key-nvim
-        blink-cmp
-        colorful-menu-nvim
-
-        # lsp
-        nvim-lspconfig
-        nvim-treesitter-textobjects
-        nvim-treesitter.withAllGrammars
-        lspkind-nvim
-
-        # TODO Lazygit + Neorg
-        neorg
-        neorg-telescope
-
-        # visual
-        nvim-web-devicons
-        oxocarbon-nvim
-        lualine-nvim
-      ];
-
-      extraPackages = with pkgs; [
-        lazygit
-        tree-sitter
-        ripgrep
-        fzf
-        fd
-        alejandra
-      ];
+    specs.initLua = {
+      data = null;
+      before = ["MAIN_INIT"];
+      config = ''
+        require('init')
+        require('lz.n').load('plugins')
+      '';
     };
 
-  perSystem =
-    {
-      pkgs,
-      self',
-      ...
-    }:
-    {
-      packages.neovim = inputs.wrappers.wrappers.neovim.wrap {
-        inherit pkgs;
-        imports = [ self.wrappers.neovim ];
-      };
+    specs.general = with pkgs.vimPlugins; [
+      lz-n
+
+      # utils
+      plenary-nvim
+      telescope-nvim
+      oil-nvim
+      which-key-nvim
+      blink-cmp
+      colorful-menu-nvim
+
+      # lsp
+      nvim-lspconfig
+      nvim-treesitter-textobjects
+      nvim-treesitter.withAllGrammars
+      lspkind-nvim
+
+      # TODO Lazygit + Neorg
+      neorg
+      neorg-telescope
+
+      # visual
+      nvim-web-devicons
+      oxocarbon-nvim
+      lualine-nvim
+    ];
+
+    runtimePkgs = with pkgs; [
+      lazygit
+      tree-sitter
+      ripgrep
+      fzf
+      fd
+      alejandra
+    ];
+  };
+
+  perSystem = {
+    pkgs,
+    self',
+    ...
+  }: {
+    packages.neovim = inputs.wrappers.wrappers.neovim.wrap {
+      inherit pkgs;
+      imports = [self.lib.wrappers.neovim];
     };
+  };
 }

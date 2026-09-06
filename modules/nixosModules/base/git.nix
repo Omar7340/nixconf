@@ -1,32 +1,14 @@
-{ inputs, ... }:
-{
-  flake.nixosModules.base =
-    { config, ... }:
-    let
-      user = config.preferences.user;
-    in
-    {
-      programs.git = {
-        enable = true;
-        config = {
-          user = {
-            name = user.name;
-            email = user.mail;
-          };
-          init = {
-            defaultBranch = "main";
-          };
-          # Optionnel : pour que Git utilise l'agent SSH du système
-          core = {
-            sshCommand = "ssh -i ~/.ssh/id_ed25519";
-          };
-          safe = {
-            # Évite les erreurs de permissions sur les dépôts appartenant à root
-            directory = "/etc/nixos";
-          };
-        };
+{config, ...}: let
+  user = config.nixconf.user;
+in {
+  programs.git = {
+    enable = true;
+    config = {
+      user = {
+        inherit (user) name email;
       };
-      services.openssh.enable = true;
-
+      init.defaultBranch = "main";
+      safe.directory = "/etc/nixos";
     };
+  };
 }
