@@ -33,7 +33,7 @@ in {
     };
     address = mkOption {
       type = types.str;
-      default = "192.168.1.174";
+      default = "192.168.1.126";
     };
     trustedNetworks = mkOption {
       type = types.listOf types.str;

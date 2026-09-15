@@ -26,15 +26,12 @@
       ./nixosModules/features/desktop.nix
     ];
     homelab = mkModule [
-      inputs.vpn-confinement.nixosModules.default
-      secrets
       ./nixosModules/features/homelab/options.nix
       ./nixosModules/features/homelab/adguard.nix
       ./nixosModules/features/homelab/caddy.nix
       ./nixosModules/features/homelab/filebrowser.nix
       ./nixosModules/features/homelab/homepage.nix
       ./nixosModules/features/homelab/jellyfin.nix
-      ./nixosModules/features/homelab/torrent.nix
     ];
 
     boot = mkModule [./nixosModules/features/boot.nix];

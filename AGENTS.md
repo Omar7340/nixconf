@@ -4,6 +4,12 @@
 
 This repository is a multi-host NixOS flake. `flake.nix` declares inputs, while `modules/default.nix` explicitly exports modules and composes the `wsl`, `tower`, and `babel` hosts. Put shared settings in `modules/nixosModules/base/`, optional capabilities in `modules/nixosModules/features/`, reusable profiles in `modules/nixosModules/profiles/`, and program wrappers in `modules/wrappedPrograms/`. Keep application-specific configuration beside its module, such as Neovim Lua files under `modules/wrappedPrograms/neovim/config/`. Encrypted material belongs in `secrets/`; never commit plaintext credentials.
 
+## Changelog & Improvement Tracking
+
+Maintain `CHANGELOG.md` for every material configuration or deployment change. Add entries under the current date, newest first, and summarize affected hosts, services, security-relevant behavior, migrations, and validation. Do not add changelog entries for read-only investigation or formatting-only changes.
+
+Keep deferred technical improvements in `IMPROVEMENTS.md`. Update or remove an item when it is implemented, rejected, or superseded, and reference the corresponding changelog entry when appropriate.
+
 ## Build, Test, and Development Commands
 
 - `nix flake check` evaluates the flake and runs any declared checks.

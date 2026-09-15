@@ -19,12 +19,12 @@ in {
     };
   };
   systemd.tmpfiles.rules = [
+    "d '${mediaDir}' 0770 root media - -"
     "d '${stateDir}' 0700 jellyfin root - -"
     "d '${stateDir}/log' 0700 jellyfin root - -"
     "d '${stateDir}/cache' 0700 jellyfin root - -"
     "d '${stateDir}/data' 0700 jellyfin root - -"
     "d '${stateDir}/config' 0700 jellyfin root - -"
-    "d '${mediaDir}/library' 0775 jellyfin media - -"
   ];
   homelab.catalog = [
     {
