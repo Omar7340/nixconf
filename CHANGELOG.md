@@ -4,6 +4,12 @@ Material configuration and deployment changes are recorded here, newest first.
 
 ## 2026-09-15
 
+### Tower boot experience
+
+- Replaced systemd-boot with Limine on Tower, using a styled Tokyo Night menu, a three-generation retention limit, and a Memtest86+ chainload entry.
+- Enabled quieter kernel and initrd output so Plymouth remains visible while preserving the emergency boot shell.
+- Moved the complete NVIDIA display stack into the initrd to reduce late framebuffer mode changes during startup.
+
 ### Babel homelab deployment
 
 - Installed NixOS on Babel's HGST system disk and provisioned the Samsung T5 as `/mnt/media` with Disko. The Kingston Ventoy installer USB was identified by its persistent device ID and excluded from all writes.
