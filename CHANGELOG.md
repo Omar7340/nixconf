@@ -4,6 +4,10 @@ Material configuration and deployment changes are recorded here, newest first.
 
 ## 2026-09-15
 
+### Tower Tailscale
+
+- Enabled Tailscale declaratively on Tower and opened its UDP transport port in the host firewall.
+
 ### Tower boot experience
 
 - Replaced systemd-boot with Limine on Tower, using a styled Tokyo Night menu, a three-generation retention limit, and a Memtest86+ chainload entry.
