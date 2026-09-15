@@ -29,5 +29,6 @@
     discord
     dolphin-emu
     dualsensectl
+    chiaki-ng
   ];
 }

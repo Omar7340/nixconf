@@ -4,6 +4,10 @@ Material configuration and deployment changes are recorded here, newest first.
 
 ## 2026-09-15
 
+### Tower Chiaki-ng
+
+- Added Chiaki-ng to Tower's gaming packages for PlayStation Remote Play.
+
 ### Tower Tailscale
 
 - Enabled Tailscale declaratively on Tower and opened its UDP transport port in the host firewall.
