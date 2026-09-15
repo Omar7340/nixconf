@@ -7,6 +7,7 @@ Material configuration and deployment changes are recorded here, newest first.
 ### Tower Tailscale
 
 - Enabled Tailscale declaratively on Tower and opened its UDP transport port in the host firewall.
+- Mapped Babel's private service hostnames to its Tailscale address and trusted Babel's Caddy root CA, allowing Brave to open the homelab HTTPS endpoints without DNS or certificate warnings.
 
 ### Tower boot experience
 
