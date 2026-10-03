@@ -2,8 +2,7 @@
   environment.shellAliases = {
     ll = "ls -al";
     cdc = "cd /etc/nixos";
-    econf = "cdc && nvim /etc/nixos";
-    rebuild = "nh os switch";
+    econf = "cdc && $EDITOR /etc/nixos/flake.nix";
     ni = "nix-inspect";
   };
 }

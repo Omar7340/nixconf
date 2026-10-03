@@ -3,7 +3,7 @@ theme = "ao"
 [editor]
 line-number = "relative"
 cursorline = true
-shell = ["alacritty", "--command"]
+shell = ["bash", "-c"]
 
 
 [editor.cursor-shape]

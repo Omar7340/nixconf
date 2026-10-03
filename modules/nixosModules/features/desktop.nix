@@ -21,7 +21,6 @@
   users.users.${config.nixconf.user.name}.extraGroups = ["i2c"];
   networking.networkmanager.enable = true;
   environment.systemPackages = with pkgs; [
-    alacritty
     bibata-cursors
     kdePackages.kamoso
     kdePackages.plasma-browser-integration

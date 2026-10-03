@@ -1,0 +1,6 @@
+// Start explicitly with `zellij`; Ctrl-g switches the locked input mode.
+default_shell "fish"
+default_mode "locked"
+mouse_mode true
+pane_frames true
+theme "tokyo-night"

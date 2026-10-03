@@ -17,12 +17,15 @@
 
     server = mkModule [./nixosModules/profiles/server.nix];
     development = mkModule [nixvim helix ./nixosModules/features/development.nix];
+    terminal = mkModule [./nixosModules/features/terminal];
+    terminalDesktop = mkModule [./nixosModules/features/terminal/emulator.nix];
     desktop = mkModule [
       inputs.stylix.nixosModules.stylix
       browsers
       theme
       home
       office
+      terminalDesktop
       ./nixosModules/features/desktop.nix
     ];
     homelab = mkModule [
@@ -96,6 +99,7 @@ in {
         inputs.hjem.nixosModules.default
         nixosModules.towerHost
         nixosModules.base
+        nixosModules.terminal
         nixosModules.development
         nixosModules.multimedia
         nixosModules.desktop
@@ -104,11 +108,12 @@ in {
         nixosModules.towerRgb
         nixosModules.ai
       ];
-      wsl = mkHost [nixosModules.wslHost nixosModules.base nixosModules.nvf];
+      wsl = mkHost [nixosModules.wslHost nixosModules.base nixosModules.terminal nixosModules.nvf];
       babel = mkHost [
         inputs.hjem.nixosModules.default
         nixosModules.babelHost
         nixosModules.base
+        nixosModules.terminal
         nixosModules.development
         nixosModules.server
         nixosModules.homelab

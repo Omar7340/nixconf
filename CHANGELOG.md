@@ -11,6 +11,17 @@ Material configuration and deployment changes are recorded here, newest first.
 - Diagnosis: the boot journal showed the client reporting no devices and deactivating successfully before a manual restart.
 - Validation: Alejandra, Statix, the x86_64-linux flake check, the complete Tower build, and a simulated empty-device startup passed. Activated on Tower (generation 204); both services are running and the client journal confirms the Fill effect started. Boot-time keyboard lighting still needs confirmation after a reboot.
 
+### Terminal environment
+
+- Activated the terminal environment on Tower with `nh os switch --no-nom --no-update-lock-file -R path:/etc/nixos#tower`. Disabled Stylix's Fish palette injection in `terminal/emulator.nix` after a live smoke check exposed it overriding Kitty's Tokyo Night colors. Confirmed the active generation, healthy display manager/Tailscale, no failed system units, available Fish functions, Atuin's Ctrl-R binding, and `/etc/atuin` configuration in a fresh login environment.
+- Added a shared native NixOS terminal feature for Tower, Babel, and WSL: Fish, Starship, local-only Atuin history, zoxide, fzf, fd, ripgrep, bat, eza, jq, Yazi, Lazygit, btop, delta, and on-demand Zellij. No Home Manager or additional configuration framework was introduced.
+- Consolidated terminal tools out of the development package list. Tower now uses a configured Tokyo Night Kitty; removed Alacritty and updated Niri launch bindings. Babel no longer installs Kitty through the development profile.
+- Kept Bash as the login shell; Kitty and Zellij explicitly launch Fish. Preserved Neovim as the editor on Tower/Babel and supplied a Nano fallback on WSL. Corrected Helix's command shell to Bash.
+- Added fuzzy navigation/editor functions, visible Git abbreviations, `terminal-help`, and explicit `nixos-workflow` commands for checks, formatting, builds, diffs, generations, and activation. Removed the generic `rebuild` alias; activation requires a named host matching the local hostname.
+- Disabled Atuin synchronization, update checks, daemon, and AI shortcut. Git uses delta without replacing normal Git commands. Existing lock-file changes and encrypted secrets were left untouched.
+- Added the terminal README with file responsibilities, configuration limitations, keyboard shortcuts, and migration notes.
+- Validation: Alejandra, Statix, full flake check for x86_64-linux, and complete Tower/Babel/WSL system builds passed. Generated Fish syntax, Starship context rendering, Kitty config parsing, Zellij wrapper/config, help output, and workflow host rejection were checked. The previously recorded Tower evaluation failure no longer reproduced, so its backlog item was removed. Tower activation was subsequently verified as recorded above; graphical session appearance has not been inspected.
+
 ## 2026-09-15
 
 ### Tower Chiaki-ng
