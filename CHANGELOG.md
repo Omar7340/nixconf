@@ -4,6 +4,11 @@ Material configuration and deployment changes are recorded here, newest first.
 
 ## 2026-10-03
 
+### Flake inputs
+
+- Recorded the existing locked-input updates for Tower, Babel, and WSL, including Nixpkgs, Disko, Hjem, NixOS-WSL, editor modules, Stylix, Sops, VPN confinement, and supporting dependencies. No encrypted secrets changed.
+- Validation: Alejandra, Statix, the x86_64-linux flake check, and complete Tower, Babel, and WSL builds passed with these locked inputs. Tower is running generation 204; Babel and WSL were built without activation.
+
 ### Tower OpenRGB startup
 
 - Fixed the animation client exiting successfully when OpenRGB has not detected devices during boot. It now fails and retries after five seconds, so lighting can start once detection completes.
