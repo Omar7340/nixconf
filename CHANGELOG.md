@@ -2,6 +2,15 @@
 
 Material configuration and deployment changes are recorded here, newest first.
 
+## 2026-10-03
+
+### Tower OpenRGB startup
+
+- Fixed the animation client exiting successfully when OpenRGB has not detected devices during boot. It now fails and retries after five seconds, so lighting can start once detection completes.
+- Required the OpenRGB server and propagated server restarts to the animation client. Enabled unbuffered client logs for startup diagnostics.
+- Diagnosis: the boot journal showed the client reporting no devices and deactivating successfully before a manual restart.
+- Validation: Alejandra, Statix, the x86_64-linux flake check, the complete Tower build, and a simulated empty-device startup passed. Activated on Tower (generation 204); both services are running and the client journal confirms the Fill effect started. Boot-time keyboard lighting still needs confirmation after a reboot.
+
 ## 2026-09-15
 
 ### Tower Chiaki-ng

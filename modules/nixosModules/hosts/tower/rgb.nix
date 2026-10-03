@@ -19,9 +19,11 @@ in {
   systemd.services.openrgb-client = {
     description = "Start the OpenRGB animation client";
     after = ["openrgb.service"];
+    requires = ["openrgb.service"];
+    partOf = ["openrgb.service"];
     wantedBy = ["multi-user.target"];
     serviceConfig = {
-      ExecStart = "${pythonEnv}/bin/python ${script}";
+      ExecStart = "${pythonEnv}/bin/python -u ${script}";
       Restart = "on-failure";
       RestartSec = "5s";
     };
