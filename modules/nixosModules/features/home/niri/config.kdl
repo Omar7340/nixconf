@@ -117,9 +117,7 @@ binds {
     // Most actions that you can bind here can also be invoked programmatically with
     // `niri msg action do-something`.
 
-    // Mod-Shift-/, which is usually the same as Mod-?,
-    // shows a list of important hotkeys.
-    Mod+Shift+Slash { show-hotkey-overlay; }
+    // French AZERTY: avoid punctuation requiring Shift or AltGr.
     Mod+F1 hotkey-overlay-title="Keyboard shortcuts" { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
@@ -137,7 +135,7 @@ binds {
     Mod+Shift+S hotkey-overlay-title="Steam" { spawn "steam"; }
     Mod+Shift+C hotkey-overlay-title="Clipboard history" { spawn "niri-clipboard"; }
     Mod+Shift+N hotkey-overlay-title="Toggle notifications" { spawn "makoctl" "mode" "-t" "do-not-disturb"; }
-    Mod+Shift+Comma hotkey-overlay-title="Customize desktop" { spawn "niri-desktop" "settings"; }
+    Mod+F2 hotkey-overlay-title="Customize desktop" { spawn "niri-desktop" "settings"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
@@ -149,8 +147,11 @@ binds {
     XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
     XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
 
-    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn "monitor-brightness" "up"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "monitor-brightness" "down"; }
+    Mod+F5 hotkey-overlay-title="Lower monitor brightness" { spawn "monitor-brightness" "down"; }
+    Mod+F6 hotkey-overlay-title="Raise monitor brightness" { spawn "monitor-brightness" "up"; }
+    Mod+Shift+B hotkey-overlay-title="Choose monitor brightness" { spawn "monitor-brightness" "menu"; }
 
     Mod+O repeat=false { toggle-overview; }
 
@@ -222,6 +223,8 @@ binds {
     Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
     Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
+    // Unshifted AZERTY number row: & é " ' ( - è _ ç à.
+    // Numeric aliases also work when temporarily using the US layout.
     Mod+ampersand { focus-workspace 1; }
     Mod+1 { focus-workspace 1; }
     Mod+eacute { focus-workspace 2; }
@@ -240,6 +243,8 @@ binds {
     Mod+8 { focus-workspace 8; }
     Mod+ccedilla { focus-workspace 9; }
     Mod+9 { focus-workspace 9; }
+    Mod+agrave { focus-workspace 10; }
+    Mod+0 { focus-workspace 10; }
     Mod+Ctrl+ampersand { move-column-to-workspace 1; }
     Mod+Ctrl+1 { move-column-to-workspace 1; }
     Mod+Ctrl+eacute { move-column-to-workspace 2; }
@@ -258,14 +263,16 @@ binds {
     Mod+Ctrl+8 { move-column-to-workspace 8; }
     Mod+Ctrl+ccedilla { move-column-to-workspace 9; }
     Mod+Ctrl+9 { move-column-to-workspace 9; }
+    Mod+Ctrl+agrave { move-column-to-workspace 10; }
+    Mod+Ctrl+0 { move-column-to-workspace 10; }
 
-    Mod+BracketLeft  { consume-or-expel-window-left; }
-    Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+Alt+Left hotkey-overlay-title="Group/ungroup window to the left" { consume-or-expel-window-left; }
+    Mod+Alt+Right hotkey-overlay-title="Group/ungroup window to the right" { consume-or-expel-window-right; }
 
     // Consume one window from the right to the bottom of the focused column.
-    Mod+Comma  { consume-window-into-column; }
+    Mod+S hotkey-overlay-title="Stack window into column" { consume-window-into-column; }
     // Expel the bottom window from the focused column to the right.
-    Mod+Period { expel-window-from-column; }
+    Mod+Shift+D hotkey-overlay-title="Detach window from column" { expel-window-from-column; }
 
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
@@ -280,12 +287,12 @@ binds {
     // Center all fully visible columns on screen.
     Mod+Ctrl+C { center-visible-columns; }
 
-    Mod+Alt+Minus { set-column-width "-10%"; }
-    Mod+Alt+Equal { set-column-width "+10%"; }
+    Mod+Ctrl+Alt+Left hotkey-overlay-title="Narrower column" { set-column-width "-10%"; }
+    Mod+Ctrl+Alt+Right hotkey-overlay-title="Wider column" { set-column-width "+10%"; }
 
     // Finer height adjustments when in column with other windows.
-    Mod+Shift+Minus { set-window-height "-10%"; }
-    Mod+Shift+Equal { set-window-height "+10%"; }
+    Mod+Ctrl+Alt+Down hotkey-overlay-title="Shorter window" { set-window-height "-10%"; }
+    Mod+Ctrl+Alt+Up hotkey-overlay-title="Taller window" { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
     Mod+V       { toggle-window-floating; }

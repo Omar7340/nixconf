@@ -14,7 +14,9 @@ The Philips Evnia 34M2C3500L on DP-2 uses 3440×1440 at 180 Hz, scale 1. The RTX
 | Super+E | Yazi file manager |
 | Super+W | Search wallpapers by filename |
 | Super+Shift+W | Random wallpaper and matching palette |
-| Super+Shift+Comma | Desktop customization menu |
+| Super+F2 | Desktop customization menu |
+| Super+F5 / F6 | Lower / raise monitor brightness by 5% |
+| Super+Shift+B | Choose monitor brightness |
 | Super+Shift+C | Search text clipboard history |
 | Super+Shift+N | Toggle notification Do Not Disturb |
 | Super+Shift+S | Steam |
@@ -23,8 +25,13 @@ The Philips Evnia 34M2C3500L on DP-2 uses 3440×1440 at 180 Hz, scale 1. The RTX
 | Super+Q | Close window |
 | Super+arrows | Focus windows |
 | Super+Ctrl+arrows | Move windows |
-| Super+1…9 | Workspace (physical number row on AZERTY) |
-| Super+Ctrl+1…9 | Move column to workspace |
+| Super + & é " ' ( - è _ ç à | Workspaces 1–10, without Shift |
+| Super+Ctrl + the same number-row key | Move column to workspace 1–10 |
+| Super+Page Up / Page Down | Previous / next workspace |
+| Super+Alt+Left / Right | Group or ungroup the window on that side |
+| Super+S / Super+Shift+D | Stack / detach a window |
+| Super+Ctrl+Alt+Left / Right | Decrease / increase column width |
+| Super+Ctrl+Alt+Down / Up | Decrease / increase window height |
 | Super+R | Cycle column widths |
 | Super+F | Maximize column |
 | Super+Shift+F | Fullscreen window |
@@ -36,9 +43,17 @@ The Philips Evnia 34M2C3500L on DP-2 uses 3440×1440 at 180 Hz, scale 1. The RTX
 
 Screenshots are saved under `~/Pictures/Screenshots`. Audio and media keys work; click the volume widget for device selection. The tray includes NetworkManager and supported running applications. Lock after 10 idle minutes, display sleep after 15; idle inhibitors from games/video are honored. The system also locks before suspend.
 
+Bindings use the letters printed on a French AZERTY keyboard. Window grouping, resizing, customization and help do not require AltGr or shifted punctuation. The unshifted number row selects workspaces; numeric aliases remain available when switching to the US layout.
+
+The brightness widget controls the Philips monitor's hardware backlight over DisplayPort DDC/CI: scroll to adjust, or click to choose a percentage. Brightness media keys also work. `monitor-brightness 40` sets 40%; no sudo is needed. Enable DDC/CI in the monitor's on-screen menu if it becomes unavailable. The implementation uses [ddcutil's brightness VCP control](https://www.ddcutil.com/command_setvcp/).
+
+Neovim in Niri reads the wallpaper palette for editor surfaces, syntax, floating windows, Telescope and the status line. Open instances refresh automatically when the palette changes; `:WallpaperTheme` also reloads it. Diagnostic warning/error colors retain their meanings. Outside Niri, or without a valid palette, the configured editor theme remains the fallback. Both the installed Nixvim editor and the standalone wrapper share this integration. Highlights use the [Neovim highlight API](https://neovim.io/doc/user/api/#nvim_set_hl()).
+
 ## Customize without rebuilding
 
-Open Super+Shift+Comma. It creates editable files only when missing:
+Brightness key repeats and scroll events update a cached target immediately; one background writer applies the latest value through DDC/CI. The bar reads this cache every second, with hardware resynchronization once per idle minute. Run `monitor-brightness sync` after changing brightness using the monitor's physical buttons if you want an immediate refresh. Tower's monitor model is also stored in `/etc/monitor-brightness-model` so shortcuts and the bar use the same monitor before and after session environment changes.
+
+Open Super+F2. It creates editable files only when missing:
 
 - `~/.config/niri/local.kdl`: Niri overrides, watched and reloaded automatically. Add output, input, layout, window rules or binds here; later settings override the base configuration. Validate with `niri validate`.
 - `~/.config/niri-desktop/settings.toml`: wallpaper folder, dark/light mode, Material palette scheme, contrast and transition. Run `niri-desktop init` after editing.

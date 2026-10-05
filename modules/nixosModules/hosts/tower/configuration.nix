@@ -4,6 +4,8 @@
   ...
 }: {
   nixconf.desktop.session = "niri";
+  environment.sessionVariables.NIRI_BRIGHTNESS_MONITOR = "34M2C3500L";
+  environment.etc."monitor-brightness-model".text = "34M2C3500L\n";
   specialisation.KDE.configuration = {
     nixconf.desktop.session = lib.mkForce "plasma";
     system.nixos.tags = ["KDE"];

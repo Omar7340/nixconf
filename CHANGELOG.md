@@ -4,6 +4,27 @@ Material configuration and deployment changes are recorded here, newest first.
 
 ## 2026-10-06
 
+### Tower responsive monitor brightness
+
+- Replaced repeated display discovery, synchronous reads and queued brightness commands with a cached I2C bus and brightness target. One background writer coalesces rapid key/scroll requests and uses direct absolute DDC writes without per-write readback; idle status checks reconcile physical OSD changes once per minute.
+- Made the Waybar percentage refresh once per second from the cache, removed repeated success notifications, and kept the brightness picker outside the state lock.
+- Validation: Alejandra, Statix, the x86_64-linux flake check and full Tower/Niri plus KDE builds passed. A real three-request burst submitted in 38 ms and reached the combined hardware target in 390 ms; independent DDC readback verified the result and restoration of the original brightness.
+- Deployment: activated Tower generation 211 without restarting Niri or SDDM, updated the existing custom Waybar brightness interval and verified both the bar and display manager are active. Persistent monitor selection also works without the new session environment variable; physical OSD changes can be refreshed immediately with `monitor-brightness sync`.
+
+### Neovim wallpaper colors and Tower monitor brightness
+
+- Connected both the installed Nixvim editor and standalone Neovim wrapper to Niri's data-only wallpaper palette, including editor UI, syntax, Telescope and the automatic status-line theme. Open editors poll for palette changes and expose `:WallpaperTheme`; other desktops retain their configured theme. Shared editor modules are evaluated for Tower, WSL and Babel.
+- Added user-accessible DDC/CI brightness control for Tower's Philips 34M2C3500L, using existing I2C permissions. Super+F5/F6 and brightness media keys adjust the actual monitor by 5%; Super+Shift+B and the Waybar widget offer percentage selection. Concurrent adjustments are serialized; values respect the monitor's reported range.
+- Validation: Alejandra, Statix, the x86_64-linux flake check, Niri configuration validation and the full Tower/Niri plus KDE build passed. Verified actual Neovim highlights and automatic refresh after atomic palette replacement. As the desktop user, detected DDC on `/dev/i2c-4`, read 100% brightness, changed it to 95%, verified it and restored 100%.
+- Deployment: activated Tower generation 210 without restarting Niri or SDDM; added the brightness widget to the existing custom Waybar configuration with a backup, preserving its other settings. Reopen existing Neovim instances to load the new integration. WSL and Babel build attempts encountered unrelated registered-but-missing store dependencies; repair-mode evaluation restored the missing Babel derivation, but full builds remain unverified due to missing `cfg-if` and `udev-rules` paths.
+
+### Tower French AZERTY shortcuts
+
+- Replaced QWERTY-oriented brackets, shifted slash, comma/period and minus/equal bindings with accessible French AZERTY shortcuts. Super+F1 opens help, Super+F2 opens customization, Super+Alt+Left/Right groups windows, Super+S and Super+Shift+D stack/detach windows, and Super+Ctrl+Alt+arrows resize them.
+- Extended the unshifted French number row to ten workspaces using `& é " ' ( - è _ ç à`, with Ctrl to move the current column. Retained numeric aliases for the optional US layout and updated the shortcut reference.
+- Validation: Niri configuration validation (including the user's generated palette), Alejandra, Statix, the x86_64-linux flake check and the complete Tower build passed. Verified the installed home configuration matches the repository.
+- Deployment: activated Tower generation 209 in the current Niri session, without restarting the display manager.
+
 ### Tower live wallpaper-theme verification
 
 - Verified the first physical Niri session uses the saved HDD wallpaper and generated palette in the compositor, Waybar, launcher and terminal configuration; SDDM's shared JSON matches the current desktop palette.

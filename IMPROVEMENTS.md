@@ -13,6 +13,7 @@
 
 ## Tower and repository
 
+- Repair the remaining missing store dependencies blocking full WSL and Babel builds (`cfg-if-1.0.4` and `udev-rules`). Repair-mode evaluation restored a missing Babel Hjem derivation during the Neovim/brightness work; Tower built and activated successfully (see CHANGELOG.md, 2026-10-06).
 - After the first Niri boot, verify real SDDM authentication, the physical 3440×1440/180 Hz output, session services, screen-sharing portal, lock/unlock and actual Steam/Proton games. The nested desktop and SDDM previews check composition, not PAM authentication, physical display or game behavior (see CHANGELOG.md, 2026-10-05 and 2026-10-06, Tower desktop changes).
 - Investigate why the Philips/NVIDIA DisplayPort connection reports VRR unavailable before enabling Niri adaptive sync. Keep KDE for HDR until upstream Niri supports the required HDR/color management (see CHANGELOG.md, 2026-10-05, Tower Niri desktop).
 - Investigate Tower's Nix store consistency: the Obsidian installation encountered multiple registered but missing dependencies and generated outputs; the Niri build also required restoring `nixos-render-docs`. Targeted repairs allowed both builds to pass, but the earlier broader repair reported an unrepaired `tmpfiles.d` output closure (see CHANGELOG.md, 2026-10-05).

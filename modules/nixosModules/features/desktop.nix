@@ -32,6 +32,11 @@
     users.users.${config.nixconf.user.name}.extraGroups = ["i2c"];
     networking.networkmanager.enable = true;
     environment.systemPackages = with pkgs; [
+      (writeShellApplication {
+        name = "monitor-brightness";
+        runtimeInputs = [python3 ddcutil libnotify];
+        text = ''exec python3 ${./monitor-brightness.py} "$@"'';
+      })
       bibata-cursors
       kdePackages.kamoso
       kdePackages.plasma-browser-integration
