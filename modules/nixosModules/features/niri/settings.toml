@@ -1,0 +1,7 @@
+# Copy to ~/.config/niri-desktop/settings.toml to customize without rebuilding.
+wallpaper_directory = "/mnt/HDD/Wallpapers"
+mode = "dark"
+scheme = "scheme-tonal-spot"
+contrast = 0.15
+fallback_color = "#7aa2f7"
+transition = "fade"

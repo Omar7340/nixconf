@@ -27,6 +27,8 @@
       office
       terminalDesktop
       ./nixosModules/features/desktop.nix
+      ./nixosModules/features/niri
+      ./nixosModules/features/niri/greeter.nix
     ];
     homelab = mkModule [
       ./nixosModules/features/homelab/options.nix

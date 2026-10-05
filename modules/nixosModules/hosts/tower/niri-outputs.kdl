@@ -1,0 +1,8 @@
+// Philips Evnia 34M2C3500L on DisplayPort, verified with KScreen and EDID.
+// Integer scaling keeps X11/Proton games at the native ultrawide resolution.
+output "DP-2" {
+    mode "3440x1440@180"
+    scale 1
+    position x=0 y=0
+    // Enable in local.kdl only after `niri msg outputs` reports VRR support.
+}

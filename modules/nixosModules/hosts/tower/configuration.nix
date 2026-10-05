@@ -1,4 +1,14 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: {
+  nixconf.desktop.session = "niri";
+  specialisation.KDE.configuration = {
+    nixconf.desktop.session = lib.mkForce "plasma";
+    system.nixos.tags = ["KDE"];
+  };
+  environment.etc."niri-desktop/outputs.kdl".source = ./niri-outputs.kdl;
   nix.settings.secret-key-files = ["/var/lib/nix-signing/tower-1.sec"];
   networking = {
     hostName = "tower";

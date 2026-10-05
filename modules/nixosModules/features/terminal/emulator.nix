@@ -1,10 +1,22 @@
-{pkgs, ...}: let
+{
+  pkgs,
+  config,
+  ...
+}: let
+  kittyConfig =
+    if config.nixconf.desktop.session == "niri"
+    then
+      pkgs.writeText "kitty-niri.conf" ''
+        include ${./kitty.conf}
+        include ~/.local/state/niri-desktop/theme/kitty.conf
+      ''
+    else ./kitty.conf;
   kitty = pkgs.symlinkJoin {
     name = "kitty-configured";
     paths = [pkgs.kitty];
     nativeBuildInputs = [pkgs.makeWrapper];
     postBuild = ''
-      wrapProgram $out/bin/kitty --add-flags "--config ${./kitty.conf}"
+      wrapProgram $out/bin/kitty --add-flags "--config ${kittyConfig}"
     '';
   };
 in {

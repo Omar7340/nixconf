@@ -1,0 +1,9 @@
+[SddmGreeterTheme]
+Name=Tower
+Description=Wallpaper-driven Tower login
+Author=Tower
+Version=1.0
+Type=sddm-theme
+MainScript=Main.qml
+Theme-API=2.0
+QtVersion=6

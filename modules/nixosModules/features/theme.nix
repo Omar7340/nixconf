@@ -10,16 +10,16 @@
     };
     fonts = {
       serif = {
-        package = pkgs.nerd-fonts.fira-code;
-        name = "Fira Code Nerd Font";
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font";
       };
       sansSerif = {
-        package = pkgs.nerd-fonts.fira-code;
-        name = "Fira Code Nerd Font";
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font";
       };
       monospace = {
-        package = pkgs.nerd-fonts.fira-code;
-        name = "Fira Code Nerd Font";
+        package = pkgs.nerd-fonts.jetbrains-mono;
+        name = "JetBrainsMono Nerd Font";
       };
       emoji = {
         package = pkgs.noto-fonts-color-emoji;

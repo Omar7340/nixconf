@@ -1,0 +1,14 @@
+layout {
+    focus-ring {
+        width 3
+        active-color "{{colors.primary.default.hex}}"
+        inactive-color "{{colors.outline_variant.default.hex}}"
+    }
+    shadow {
+        on
+        softness 25
+        spread 3
+        offset x=0 y=5
+        color "#00000055"
+    }
+}

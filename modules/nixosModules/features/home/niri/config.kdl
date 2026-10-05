@@ -1,6 +1,9 @@
 input {
     keyboard {
-        xkb {}
+        xkb {
+            layout "fr,us"
+            options "grp:alt_shift_toggle"
+        }
         numlock
     }
     mouse {}
@@ -10,24 +13,11 @@ input {
     warp-mouse-to-focus
 }
 
-// TV Toshiba
-output "Vestel Elektronik Sanayi ve Ticaret A. S. 55 FHD_LCD-TV Unknown" {
-    mode "1920x1080@59.939"
-    scale 1
-    transform "normal"
-}
-
-
-output "HP Inc. HP 24o CNK9242BCV" {
-    mode "1920x1080@60.000"
-    scale 1
-    transform "normal"
-    position x=0 y=0
-}
+include "/etc/niri-desktop/outputs.kdl"
 
 layout {
-    gaps 6
-    center-focused-column "never"
+    gaps 12
+    center-focused-column "on-overflow"
 
     preset-column-widths {
         proportion 0.33333
@@ -57,7 +47,7 @@ layout {
     background-color "transparent"
 }
 
-spawn-at-startup "noctalia-shell"
+// Session components are supervised by systemd, scoped to niri.service.
 
 cursor {
   xcursor-theme "Bibata-Modern-Classic"
@@ -72,23 +62,24 @@ hotkey-overlay {
 }
 
 prefer-no-csd
-screenshot-path "~/Images/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
-
-debug {
-  // Allows notification actions and window activation from Noctalia.
-  honor-xdg-activation-with-invalid-serial
-}
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 window-rule {
-  geometry-corner-radius 20
+  geometry-corner-radius 12
   clip-to-geometry true
 }
 
-layer-rule {
-  match namespace="^noctalia-wallpaper*"
-  place-within-backdrop true
+// Steam/Proton games keep native fullscreen geometry without rounded edges.
+window-rule {
+  match app-id=r#"^steam_app_\d+$"#
+  open-fullscreen true
+  geometry-corner-radius 0
+  clip-to-geometry false
 }
-
+window-rule {
+  match app-id="^(steam|Steam)$" title="^(Friends List|Steam Settings)$"
+  open-floating true
+}
 
 overview {
   workspace-shadow {
@@ -129,16 +120,24 @@ binds {
     // Mod-Shift-/, which is usually the same as Mod-?,
     // shows a list of important hotkeys.
     Mod+Shift+Slash { show-hotkey-overlay; }
+    Mod+F1 hotkey-overlay-title="Keyboard shortcuts" { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: Kitty" { spawn "kitty"; }
     Mod+E hotkey-overlay-title="Open Yazi" { spawn "kitty" "yazi"; }
-    Mod+A hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+A hotkey-overlay-title="Run an Application: fuzzel" { spawn "niri-launcher"; }
     Mod+B hotkey-overlay-title="Open Brave" { spawn "brave"; }
-    Mod+L hotkey-overlay-title="Lock the Screen" { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
+    Mod+L hotkey-overlay-title="Lock the Screen" { spawn "niri-lock"; }
 
-    Mod+W hotkey-overlay-title="Change Wallpaper" { spawn-sh "noctalia-shell ipc call wallpaper random"; }
-    Mod+X hotkey-overlay-title="Zoom on the screen (woomer)" { spawn "woomer"; }
+    Mod+W hotkey-overlay-title="Change Wallpaper" { spawn "niri-desktop" "pick"; }
+    Mod+Return hotkey-overlay-title="Terminal" { spawn "kitty"; }
+    Mod+Space hotkey-overlay-title="Applications" { spawn "niri-launcher"; }
+    Mod+D hotkey-overlay-title="Applications" { spawn "niri-launcher"; }
+    Mod+Shift+W hotkey-overlay-title="Random wallpaper and palette" { spawn "niri-desktop" "random"; }
+    Mod+Shift+S hotkey-overlay-title="Steam" { spawn "steam"; }
+    Mod+Shift+C hotkey-overlay-title="Clipboard history" { spawn "niri-clipboard"; }
+    Mod+Shift+N hotkey-overlay-title="Toggle notifications" { spawn "makoctl" "mode" "-t" "do-not-disturb"; }
+    Mod+Shift+Comma hotkey-overlay-title="Customize desktop" { spawn "niri-desktop" "settings"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+ -l 1.0"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-"; }
@@ -223,23 +222,41 @@ binds {
     Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
     Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
 
+    Mod+ampersand { focus-workspace 1; }
     Mod+1 { focus-workspace 1; }
+    Mod+eacute { focus-workspace 2; }
     Mod+2 { focus-workspace 2; }
+    Mod+quotedbl { focus-workspace 3; }
     Mod+3 { focus-workspace 3; }
+    Mod+apostrophe { focus-workspace 4; }
     Mod+4 { focus-workspace 4; }
+    Mod+parenleft { focus-workspace 5; }
     Mod+5 { focus-workspace 5; }
+    Mod+minus { focus-workspace 6; }
     Mod+6 { focus-workspace 6; }
+    Mod+egrave { focus-workspace 7; }
     Mod+7 { focus-workspace 7; }
+    Mod+underscore { focus-workspace 8; }
     Mod+8 { focus-workspace 8; }
+    Mod+ccedilla { focus-workspace 9; }
     Mod+9 { focus-workspace 9; }
+    Mod+Ctrl+ampersand { move-column-to-workspace 1; }
     Mod+Ctrl+1 { move-column-to-workspace 1; }
+    Mod+Ctrl+eacute { move-column-to-workspace 2; }
     Mod+Ctrl+2 { move-column-to-workspace 2; }
+    Mod+Ctrl+quotedbl { move-column-to-workspace 3; }
     Mod+Ctrl+3 { move-column-to-workspace 3; }
+    Mod+Ctrl+apostrophe { move-column-to-workspace 4; }
     Mod+Ctrl+4 { move-column-to-workspace 4; }
+    Mod+Ctrl+parenleft { move-column-to-workspace 5; }
     Mod+Ctrl+5 { move-column-to-workspace 5; }
+    Mod+Ctrl+minus { move-column-to-workspace 6; }
     Mod+Ctrl+6 { move-column-to-workspace 6; }
+    Mod+Ctrl+egrave { move-column-to-workspace 7; }
     Mod+Ctrl+7 { move-column-to-workspace 7; }
+    Mod+Ctrl+underscore { move-column-to-workspace 8; }
     Mod+Ctrl+8 { move-column-to-workspace 8; }
+    Mod+Ctrl+ccedilla { move-column-to-workspace 9; }
     Mod+Ctrl+9 { move-column-to-workspace 9; }
 
     Mod+BracketLeft  { consume-or-expel-window-left; }
@@ -263,8 +280,8 @@ binds {
     // Center all fully visible columns on screen.
     Mod+Ctrl+C { center-visible-columns; }
 
-    Mod+Minus { set-column-width "-10%"; }
-    Mod+Equal { set-column-width "+10%"; }
+    Mod+Alt+Minus { set-column-width "-10%"; }
+    Mod+Alt+Equal { set-column-width "+10%"; }
 
     // Finer height adjustments when in column with other windows.
     Mod+Shift+Minus { set-window-height "-10%"; }
@@ -280,10 +297,14 @@ binds {
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-    Mod+Shift+E { quit; }
-    Ctrl+Alt+Delete { quit; }
+    Mod+Shift+E { spawn "niri-desktop" "power"; }
+    Ctrl+Alt+Delete { spawn "niri-desktop" "power"; }
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Shift+P { power-off-monitors; }
 }
+
+// These files are user-owned and survive rebuilds. Included files live-reload.
+include optional=true "~/.local/state/niri-desktop/theme/niri.kdl"
+include optional=true "~/.config/niri/local.kdl"

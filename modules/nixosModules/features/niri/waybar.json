@@ -1,0 +1,23 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "margin-top": 10,
+  "margin-left": 14,
+  "margin-right": 14,
+  "modules-left": ["custom/launcher", "niri/workspaces", "niri/window"],
+  "modules-center": ["clock"],
+  "modules-right": ["mpris", "cpu", "memory", "pulseaudio", "network", "tray", "custom/wallpaper", "custom/power"],
+  "custom/launcher": {"format": "󱄅", "tooltip-format": "Applications · Super+Space", "on-click": "niri-launcher"},
+  "niri/workspaces": {"format": "{index}", "all-outputs": false},
+  "niri/window": {"max-length": 45},
+  "clock": {"format": "{:%a %d %b  ·  %H:%M}", "tooltip-format": "<tt>{calendar}</tt>"},
+  "mpris": {"format": "{player_icon} {dynamic}", "dynamic-len": 25, "player-icons": {"default": "󰎆"}},
+  "cpu": {"format": "󰍛 {usage}%", "interval": 5},
+  "memory": {"format": "󰘚 {percentage}%", "interval": 5},
+  "pulseaudio": {"format": "{icon} {volume}%", "format-muted": "󰝟", "format-icons": {"default": ["󰕿", "󰖀", "󰕾"]}, "on-click": "pavucontrol", "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"},
+  "network": {"format-ethernet": "󰈀", "format-wifi": "󰖩 {signalStrength}%", "format-disconnected": "󰖪", "tooltip-format": "{ifname} · {ipaddr}", "on-click": "nm-connection-editor"},
+  "tray": {"spacing": 10},
+  "custom/wallpaper": {"format": "󰸉", "tooltip-format": "Wallpaper · Super+W", "on-click": "niri-desktop pick", "on-click-right": "niri-desktop random"},
+  "custom/power": {"format": "󰐥", "tooltip-format": "Session and power", "on-click": "niri-desktop power"}
+}

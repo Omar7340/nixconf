@@ -2,6 +2,42 @@
 
 Material configuration and deployment changes are recorded here, newest first.
 
+## 2026-10-06
+
+### Tower live wallpaper-theme verification
+
+- Verified the first physical Niri session uses the saved HDD wallpaper and generated palette in the compositor, Waybar, launcher and terminal configuration; SDDM's shared JSON matches the current desktop palette.
+- Fixed competing Mako daemons: D-Bus activation now uses the same wallpaper-themed systemd service as the Niri session. Preserved `niri-notifications.service` as an alias. Previously the unthemed upstream daemon acquired the notification bus name first.
+- Moved the generated GTK color import after preserved CSS so stale KDE color imports cannot override the wallpaper palette.
+- Changed palette refresh to restart the running Waybar service rather than signal an in-process CSS reload after observing a Waybar core dump in the physical session.
+- Validation: Alejandra, Statix, the x86_64-linux flake check and complete Tower build passed. Verified live palette paths, GTK theme/font settings, matching SDDM JSON, and the physical 3440×1440/180 Hz output. After activation, both notification service names resolve to the same themed Mako process, with no restart loop; palette restoration and Waybar restart succeeded.
+- Deployment: activated Tower generation 208 without restarting SDDM or Niri, preserving the current wallpaper and session. GTK/Qt applications already open may need restarting to pick up their new settings.
+
+### Tower coherent login and application theme
+
+- Replaced the Breeze login theme with a custom Qt 6 SDDM greeter for both Niri and KDE boot configurations. It reads the selected wallpaper and Matugen palette from a shared cache, with consistent JetBrains Mono typography, authentication errors, session selection and power controls.
+- Added unprivileged wallpaper/palette publication into a desktop-owner-writable, SDDM-readable setgid directory. Only PNG/JSON data are shared; theme code remains immutable. The HDD and private home directory do not need to be accessible to SDDM, and no root image decoder or sudo synchronization helper was introduced.
+- Matched the lock-screen wallpaper, GTK settings, Qt 5/6 palettes and KDE application colors to the desktop. Unified Stylix fonts with the existing desktop/terminal font and preserved unrelated application settings with first-change backups.
+- Validation: Alejandra, Statix, the x86_64-linux flake check and complete Tower/Niri plus KDE specialization builds passed. QML lint and SDDM test-mode rendering passed in a nested Wayland session; saved `docs/sddm-preview.png`. Tested real-image palette generation and application settings, seeded the user's saved wallpaper cache, and verified SDDM can read the PNG/JSON with owner `kage`, group `sddm` and mode 0640.
+- Deployment: installed generation 207 for the next boot, retaining default Niri and the KDE specialization. The running KDE session remains on generation 205; display manager and Tailscale are active with no failed system units. Real SDDM authentication remains a first-login check; Limine/Plymouth and application-internal themes remain separate from the runtime palette.
+
+## 2026-10-05
+
+### Tower Niri desktop and KDE boot specialization
+
+- Made Niri the default Tower desktop and added an inherited `KDE` specialization to Limine. Each boot configuration selects its own SDDM session; shared hardware, gaming, secrets and storage settings are retained. Other hosts and locked inputs are unchanged.
+- Replaced the obsolete Noctalia-dependent Niri configuration with independent Fuzzel, Waybar, Mako, Awww, Swaylock and Swayidle components supervised only during the Niri session. Added Polkit, keyring, PipeWire audio, screen-sharing portals, network tray, text clipboard history, screenshots, launch/terminal shortcuts and a confirmed power menu.
+- Matched Tower's detected Philips Evnia 34M2C3500L on DP-2 to 3440×1440 at 180 Hz and integer scaling, with ultrawide column presets and French/US layouts including AZERTY workspace keys.
+- Added a recursive wallpaper picker for `/mnt/HDD/Wallpapers` and Matugen palettes for the launcher, bar, notifications, Niri accents, lock screen, GTK and new Kitty windows. Cache the selected wallpaper for HDD outages, render templates before replacing generated files, and expose persistent user-owned settings, CSS, templates and Niri overrides through the customization menu.
+- Retained NVIDIA modesetting, Steam, GE-Proton, GameMode, MangoHud and optional Gamescope; added on-demand Xwayland Satellite and fullscreen Steam game rules. HDR remains available through KDE; VRR is not enabled because the current connection reports it unavailable. Clipboard history is local and can be cleared with `cliphist wipe`.
+- Validation: Alejandra, Statix, the x86_64-linux flake check and complete Tower/Niri plus KDE specialization builds passed. Tested real-image palette generation, no-wallpaper fallback, Fuzzel parsing, the final desktop wrapper, notifications and Waybar in an isolated nested Niri session; verified on-demand Xwayland Satellite with a real X11 application. Saved a preview in `docs/niri-desktop-preview.png`. Restored the missing `nixos-render-docs` dependency encountered during the build.
+- Deployment: installed Tower generation 206 with `nh os boot`, selecting Niri for the next boot and retaining the KDE specialization. The current KDE session remains on generation 205; display manager and Tailscale are active, and no system units are failed. Physical monitor behavior, PAM unlock, screen sharing and actual games require verification after the next Niri login.
+
+### Tower Obsidian
+
+- Added Obsidian to the shared office package list, currently used by Tower.
+- Validation: Alejandra, Statix, the x86_64-linux flake check, and the full Tower build passed. Restored missing Nix store build dependencies and generated outputs encountered during the build. Activated Tower generation 205; Obsidian 1.13.7 is available, display manager and Tailscale are active, and no system units are failed.
+
 ## 2026-10-03
 
 ### Flake inputs
