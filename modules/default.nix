@@ -28,6 +28,7 @@
       terminalDesktop
       ./nixosModules/features/desktop.nix
       ./nixosModules/features/niri
+      ./nixosModules/features/hyprland
       ./nixosModules/features/niri/greeter.nix
     ];
     homelab = mkModule [

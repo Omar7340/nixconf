@@ -1,0 +1,100 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "margin-top": 10,
+  "margin-left": 14,
+  "margin-right": 14,
+  "modules-left": [
+    "custom/launcher",
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "mpris",
+    "cpu",
+    "memory",
+    "custom/brightness",
+    "pulseaudio",
+    "network",
+    "tray",
+    "custom/wallpaper",
+    "custom/power"
+  ],
+  "custom/brightness": {
+    "exec": "monitor-brightness status",
+    "return-type": "json",
+    "interval": 1,
+    "on-scroll-up": "monitor-brightness up",
+    "on-scroll-down": "monitor-brightness down",
+    "on-click": "monitor-brightness menu"
+  },
+  "custom/launcher": {
+    "format": "\udb84\udd05",
+    "tooltip-format": "Applications \u00b7 Super+Space",
+    "on-click": "hyprland-launcher"
+  },
+  "clock": {
+    "format": "{:%a %d %b  \u00b7  %H:%M}",
+    "tooltip-format": "<tt>{calendar}</tt>"
+  },
+  "mpris": {
+    "format": "{player_icon} {dynamic}",
+    "dynamic-len": 25,
+    "player-icons": {
+      "default": "\udb80\udf86"
+    }
+  },
+  "cpu": {
+    "format": "\udb80\udf5b {usage}%",
+    "interval": 5
+  },
+  "memory": {
+    "format": "\udb81\ude1a {percentage}%",
+    "interval": 5
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "\udb81\udf5f",
+    "format-icons": {
+      "default": [
+        "\udb81\udd7f",
+        "\udb81\udd80",
+        "\udb81\udd7e"
+      ]
+    },
+    "on-click": "pavucontrol",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+  },
+  "network": {
+    "format-ethernet": "\udb80\ude00",
+    "format-wifi": "\udb81\udda9 {signalStrength}%",
+    "format-disconnected": "\udb81\uddaa",
+    "tooltip-format": "{ifname} \u00b7 {ipaddr}",
+    "on-click": "nm-connection-editor"
+  },
+  "tray": {
+    "spacing": 10
+  },
+  "custom/wallpaper": {
+    "format": "\udb83\ude09",
+    "tooltip-format": "Wallpaper \u00b7 Super+W",
+    "on-click": "hyprland-desktop pick",
+    "on-click-right": "hyprland-desktop random"
+  },
+  "custom/power": {
+    "format": "\udb81\udc25",
+    "tooltip-format": "Session and power",
+    "on-click": "hyprland-desktop power"
+  },
+  "hyprland/workspaces": {
+    "format": "{id}",
+    "all-outputs": false
+  },
+  "hyprland/window": {
+    "max-length": 45
+  }
+}

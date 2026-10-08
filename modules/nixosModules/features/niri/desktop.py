@@ -15,6 +15,8 @@ import tomllib
 from PIL import Image, ImageEnhance, ImageOps
 
 HOME = Path.home()
+COMPOSITOR = os.environ.get("DESKTOP_COMPOSITOR", "niri")
+PREFIX = "hyprland" if COMPOSITOR == "hyprland" else "niri"
 DATA = Path(os.environ.get("NIRI_DESKTOP_DATA", "/etc/niri-desktop"))
 CONFIG = HOME / ".config/niri-desktop"
 STATE = HOME / ".local/state/niri-desktop"
@@ -190,7 +192,10 @@ def generate(image, cfg):
                 "--contrast", str(cfg["contrast"]), "--source-color-index", "0"]
         args += ["image", str(image)] if image else ["color", "hex", cfg["fallback_color"]]
         run(*args)
-        run("niri", "validate", "--config", str(temp / "niri.kdl"))
+        if COMPOSITOR == "niri":
+            run("niri", "validate", "--config", str(temp / "niri.kdl"))
+        else:
+            run("Hyprland", "--verify-config", "--config", str(temp / "hyprland.lua"))
         for template in (DATA / "templates").iterdir():
             (temp / template.name).replace(THEME / template.name)
     for version in (3, 4):
@@ -240,9 +245,12 @@ def refresh():
     # Waybar's in-process CSS reload crashed in the physical session. A short
     # supervised restart loads the new palette without retaining GTK CSS state.
     if run("systemctl", "--user", "is-active", "--quiet",
-           "niri-waybar.service", check=False).returncode == 0:
-        run("systemctl", "--user", "restart", "niri-waybar.service",
+           f"{PREFIX}-waybar.service", check=False).returncode == 0:
+        run("systemctl", "--user", "restart", f"{PREFIX}-waybar.service",
             check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    if COMPOSITOR == "hyprland":
+        run("hyprctl", "reload", check=False, stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL)
 
 
 def apply(image, cfg):
@@ -285,10 +293,10 @@ def customize():
     if index is None:
         return
     CONFIG.mkdir(parents=True, exist_ok=True)
-    local = HOME / ".config/niri/local.kdl"
+    local = HOME / (".config/hypr/local.lua" if COMPOSITOR == "hyprland" else ".config/niri/local.kdl")
     local.parent.mkdir(parents=True, exist_ok=True)
     if not local.exists():
-        local.write_text('// Personal overrides; Niri reloads this file automatically.\n')
+        local.write_text('-- Personal overrides; run hyprctl reload after editing.\n' if COMPOSITOR == "hyprland" else '// Personal overrides; Niri reloads this file automatically.\n')
     for filename in ("settings.toml", "waybar.json", "waybar.css"):
         if not (CONFIG / filename).exists():
             shutil.copyfile(DATA / filename, CONFIG / filename)
@@ -307,13 +315,16 @@ def power():
     if index is None:
         return
     if index == 0:
-        run("niri-lock")
+        run(f"{PREFIX}-lock")
     elif index == 1:
-        run("niri-lock")
+        run(f"{PREFIX}-lock")
         run("systemctl", "suspend")
     elif choose("Confirm", ["Cancel", options[index]]) == 1:
         if index == 2:
-            run("niri", "msg", "action", "quit", "--skip-confirmation")
+            if COMPOSITOR == "hyprland":
+                run("uwsm", "stop")
+            else:
+                run("niri", "msg", "action", "quit", "--skip-confirmation")
         else:
             run("systemctl", "reboot" if index == 3 else "poweroff")
 
@@ -328,6 +339,11 @@ def main():
         config = CONFIG / "waybar.json"
         if not config.is_file():
             config = DATA / "waybar.json"
+        if COMPOSITOR == "hyprland":
+            # Adapt existing custom bars without modifying the user's original.
+            value = config.read_text().replace('niri/workspaces', 'hyprland/workspaces').replace('niri/window', 'hyprland/window').replace('niri-', 'hyprland-').replace('{index}', '{id}')
+            config = STATE / "hyprland-waybar.json"
+            atomic(config, value)
         os.execvp("waybar", ["waybar", "--config", str(config), "--style", str(STATE / "waybar.css")])
     elif command in {"pick", "random"}:
         if not (THEME / "fuzzel.ini").exists():
@@ -355,5 +371,5 @@ if __name__ == "__main__":
     except (OSError, ValueError, subprocess.CalledProcessError) as error:
         print(error, file=sys.stderr)
         if os.environ.get("WAYLAND_DISPLAY"):
-            run("notify-send", "Niri desktop", str(error), check=False)
+            run("notify-send", f"{PREFIX.capitalize()} desktop", str(error), check=False)
         sys.exit(1)

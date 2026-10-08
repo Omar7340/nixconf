@@ -3,14 +3,15 @@
   lib,
   ...
 }: {
-  nixconf.desktop.session = "niri";
-  environment.sessionVariables.NIRI_BRIGHTNESS_MONITOR = "34M2C3500L";
-  environment.etc."monitor-brightness-model".text = "34M2C3500L\n";
+  nixconf.desktop.session = "hyprland";
+  environment.etc = {
+    "monitor-brightness-model".text = "34M2C3500L\n";
+    "hyprland-desktop/monitor.lua".source = ./hyprland-monitor.lua;
+  };
   specialisation.KDE.configuration = {
     nixconf.desktop.session = lib.mkForce "plasma";
     system.nixos.tags = ["KDE"];
   };
-  environment.etc."niri-desktop/outputs.kdl".source = ./niri-outputs.kdl;
   nix.settings.secret-key-files = ["/var/lib/nix-signing/tower-1.sec"];
   networking = {
     hostName = "tower";

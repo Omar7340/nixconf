@@ -5,7 +5,7 @@
   ...
 }: {
   options.nixconf.desktop.session = lib.mkOption {
-    type = lib.types.enum ["plasma" "niri"];
+    type = lib.types.enum ["plasma" "niri" "hyprland"];
     default = "plasma";
     description = "Desktop session selected by this system generation or specialization.";
   };
@@ -18,7 +18,9 @@
     services = {
       desktopManager.plasma6.enable = config.nixconf.desktop.session == "plasma";
       displayManager.defaultSession =
-        if config.nixconf.desktop.session == "niri"
+        if config.nixconf.desktop.session == "hyprland"
+        then "hyprland-uwsm"
+        else if config.nixconf.desktop.session == "niri"
         then "niri"
         else "plasma";
       displayManager.sddm = {

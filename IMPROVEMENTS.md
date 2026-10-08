@@ -13,8 +13,10 @@
 
 ## Tower and repository
 
+- Diagnose the October 8 DP-2 disconnects and loss of the 180 Hz mode, and investigate Brave's fatal GPU-process failure and Waybar's GLib dispatcher crash at 19:50. The unactivated Steam workaround was removed during the Hyprland migration; verify physical reconnect behavior and Brave/Steam stability under Hyprland (see CHANGELOG.md, 2026-10-08).
+
 - Repair the remaining missing store dependencies blocking full WSL and Babel builds (`cfg-if-1.0.4` and `udev-rules`). Repair-mode evaluation restored a missing Babel Hjem derivation during the Neovim/brightness work; Tower built and activated successfully (see CHANGELOG.md, 2026-10-06).
-- After the first Niri boot, verify real SDDM authentication, the physical 3440×1440/180 Hz output, session services, screen-sharing portal, lock/unlock and actual Steam/Proton games. The nested desktop and SDDM previews check composition, not PAM authentication, physical display or game behavior (see CHANGELOG.md, 2026-10-05 and 2026-10-06, Tower desktop changes).
-- Investigate why the Philips/NVIDIA DisplayPort connection reports VRR unavailable before enabling Niri adaptive sync. Keep KDE for HDR until upstream Niri supports the required HDR/color management (see CHANGELOG.md, 2026-10-05, Tower Niri desktop).
+- After the first Hyprland boot, verify SDDM authentication, the physical 3440×1440/180 Hz output, UWSM session services, screen sharing, lock/unlock and Steam/Proton games. Parser and nested checks do not establish physical display or game stability (see CHANGELOG.md, 2026-10-08, Tower Hyprland migration).
+- Investigate why the Philips/NVIDIA DisplayPort connection reports VRR unavailable before enabling adaptive sync under Hyprland. Validate Hyprland HDR/color management on the physical monitor before replacing KDE for HDR use (see CHANGELOG.md, 2026-10-08, Tower Hyprland migration).
 - Investigate Tower's Nix store consistency: the Obsidian installation encountered multiple registered but missing dependencies and generated outputs; the Niri build also required restoring `nixos-render-docs`. Targeted repairs allowed both builds to pass, but the earlier broader repair reported an unrepaired `tmpfiles.d` output closure (see CHANGELOG.md, 2026-10-05).
 - Ensure `/var/lib/nix-signing/tower-1.sec` is included in the Tower backup and disaster-recovery plan without ever committing it to Git or copying it to Babel.

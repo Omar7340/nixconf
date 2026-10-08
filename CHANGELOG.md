@@ -2,6 +2,16 @@
 
 Material configuration and deployment changes are recorded here, newest first.
 
+## 2026-10-08
+
+### Tower Hyprland migration
+
+- Replaced Tower's default Niri session with Hyprland 0.56.2 using native Lua configuration, UWSM session management, integrated Xwayland and the Hyprland screen-sharing portal. Retained KDE as a boot specialization, the existing NVIDIA driver and 3440×1440/180 Hz monitor configuration.
+- Carried over wallpaper/palette controls, GTK/Qt/editor colors, custom Waybar settings, notifications, keyring, lock/idle behavior, clipboard history, screenshots, brightness controls and French AZERTY shortcuts. Existing wallpaper and palette state remains in its original directory; custom bar modules are adapted without overwriting user files. Niri layout overrides are not imported. Password-manager windows remain excluded from screen sharing. Launcher applications use separate UWSM scopes so bar restarts do not stop them.
+- Removed the proposed Steam SDL XRandR workaround before activation. Steam and its games retain their original display-mode handling. Brave's saved core reports a fatal GPU-process failure; this differs from Steam's SDL3 segfault, and a common display trigger remains unconfirmed.
+- Validation: Alejandra, Statix, the x86_64-linux flake check and full Tower/Hyprland plus KDE builds passed. The complete Lua configuration and generated fallback palette passed Hyprland's parser. A nested instance exposed its monitor and reported no configuration errors, but the nested Wayland backend logged a configure/buffer protocol error; physical display behavior, login, screen sharing and games remain first-boot checks. Repaired the registered-but-missing `isl-0.20` store dependency encountered during the build.
+- Deployment: installed Tower generation 213 and its KDE specialization with `nh os boot --no-nom -R path:/etc/nixos#tower`. Hyprland/UWSM is the default for the next boot. The running Niri generation 211, SDDM and Tailscale remain active; no reboot or session termination was performed.
+
 ## 2026-10-06
 
 ### Tower responsive monitor brightness
