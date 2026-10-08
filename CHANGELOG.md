@@ -4,6 +4,12 @@ Material configuration and deployment changes are recorded here, newest first.
 
 ## 2026-10-08
 
+### Tower Hyprland desktop startup
+
+- Ordered Hyprland desktop services after UWSM's Wayland environment barrier. At login, the wallpaper daemon and clipboard watcher previously started without `WAYLAND_DISPLAY`, exhausted their restart limits, and left Waybar and idle locking blocked by a failed dependency.
+- Restored Waybar, wallpaper and idle locking in the physical session; Waybar reports a 3412×36 bar on DP-2. The services remain bound to the Hyprland session for logout cleanup.
+- Validation: Alejandra, Statix, the x86_64-linux flake check and full Tower build passed. Activated the fix on Tower and verified Waybar, wallpaper, theme, clipboard, idle locking and notifications are active. The next fresh login remains the check for the original startup race.
+
 ### Tower Hyprland migration
 
 - Replaced Tower's default Niri session with Hyprland 0.56.2 using native Lua configuration, UWSM session management, integrated Xwayland and the Hyprland screen-sharing portal. Retained KDE as a boot specialization, the existing NVIDIA driver and 3440×1440/180 Hz monitor configuration.

@@ -90,7 +90,9 @@
     inherit description;
     wantedBy = ["wayland-session@hyprland.desktop.target"];
     bindsTo = ["wayland-session@hyprland.desktop.target"];
-    after = ["graphical-session-pre.target"];
+    # UWSM publishes the compositor environment before the graphical session.
+    # Keep the Hyprland lifetime binding, but wait for that environment barrier.
+    after = ["wayland-session-waitenv.service"];
     enableDefaultPath = false;
     serviceConfig = {
       ExecStart = command;
